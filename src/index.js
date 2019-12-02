@@ -28,7 +28,19 @@ const resolvers = {
       }
       links.push(link)
       return link
-    }
+    },
+    updateLink: (parent, args) => {
+      const similarLinkRule = (link) => link.id === args.id
+      const previousLink = links.find(similarLinkRule)
+      const indexLink = links.findIndex(similarLinkRule)
+      const updatedLink = {
+       id: previousLink.id,
+       description: args.description,
+       url: args.url,
+     }
+     links.splice(1, indexLink, updatedLink)
+     return updatedLink
+   }
   }
 }
 
