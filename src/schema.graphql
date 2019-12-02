@@ -1,7 +1,10 @@
 type Query {
- plaines: [Plaine]
+  info: String!
+  feed: [Link!]!
 }
 
-type Plaine {
+type Link {
   id: ID!
+  description: String!
+  url: String!
 }
