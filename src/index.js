@@ -38,9 +38,21 @@ const resolvers = {
        description: args.description,
        url: args.url,
      }
-     links.splice(1, indexLink, updatedLink)
+     links.splice(indexLink, 1, updatedLink)
      return updatedLink
+   },
+   deleteLink: (parent, args) => {
+    const similarLinkRule = (link) => link.id === args.id
+    const previousLink = links.find(similarLinkRule)
+    const indexLink = links.findIndex(similarLinkRule)
+    const updatedLink = {
+     id: previousLink.id,
+     description: args.description,
+     url: args.url,
    }
+   links.splice(indexLink, 1)
+   return updatedLink
+ }
   }
 }
 
