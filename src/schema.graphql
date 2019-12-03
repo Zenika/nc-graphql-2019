@@ -31,15 +31,15 @@ type Subscriptions {
 
 type Plaine {
   id: ID!
-  mares: [Mare]
+  mares: [Mare!]!
 }
 
 type Mare {
   id: ID!
   nom: String
   plaine: Plaine!
-  canards: [Canard]
-  poissons: [Poisson]
+  canards: [Canard!]!
+  poissons: [Poisson!]!
 }
 
 type Canard {
@@ -53,5 +53,5 @@ type Poisson {
   id: ID!
   mare: Mare!
   isGros: Boolean
-  isCanardvore: Boolean
+  isCanarovore: Boolean
 }

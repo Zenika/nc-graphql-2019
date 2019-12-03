@@ -7,10 +7,6 @@ module.exports = {
   count: Int!
 }
 
-type AggregateLink {
-  count: Int!
-}
-
 type AggregateMare {
   count: Int!
 }
@@ -243,136 +239,6 @@ input CanardWhereUniqueInput {
 }
 
 scalar DateTime
-
-type Link {
-  id: ID!
-  createdAt: DateTime!
-  description: String!
-  url: String!
-}
-
-type LinkConnection {
-  pageInfo: PageInfo!
-  edges: [LinkEdge]!
-  aggregate: AggregateLink!
-}
-
-input LinkCreateInput {
-  id: ID
-  description: String!
-  url: String!
-}
-
-type LinkEdge {
-  node: Link!
-  cursor: String!
-}
-
-enum LinkOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  description_ASC
-  description_DESC
-  url_ASC
-  url_DESC
-}
-
-type LinkPreviousValues {
-  id: ID!
-  createdAt: DateTime!
-  description: String!
-  url: String!
-}
-
-type LinkSubscriptionPayload {
-  mutation: MutationType!
-  node: Link
-  updatedFields: [String!]
-  previousValues: LinkPreviousValues
-}
-
-input LinkSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: LinkWhereInput
-  AND: [LinkSubscriptionWhereInput!]
-  OR: [LinkSubscriptionWhereInput!]
-  NOT: [LinkSubscriptionWhereInput!]
-}
-
-input LinkUpdateInput {
-  description: String
-  url: String
-}
-
-input LinkUpdateManyMutationInput {
-  description: String
-  url: String
-}
-
-input LinkWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
-  url: String
-  url_not: String
-  url_in: [String!]
-  url_not_in: [String!]
-  url_lt: String
-  url_lte: String
-  url_gt: String
-  url_gte: String
-  url_contains: String
-  url_not_contains: String
-  url_starts_with: String
-  url_not_starts_with: String
-  url_ends_with: String
-  url_not_ends_with: String
-  AND: [LinkWhereInput!]
-  OR: [LinkWhereInput!]
-  NOT: [LinkWhereInput!]
-}
-
-input LinkWhereUniqueInput {
-  id: ID
-}
 
 scalar Long
 
@@ -660,12 +526,6 @@ type Mutation {
   upsertCanard(where: CanardWhereUniqueInput!, create: CanardCreateInput!, update: CanardUpdateInput!): Canard!
   deleteCanard(where: CanardWhereUniqueInput!): Canard
   deleteManyCanards(where: CanardWhereInput): BatchPayload!
-  createLink(data: LinkCreateInput!): Link!
-  updateLink(data: LinkUpdateInput!, where: LinkWhereUniqueInput!): Link
-  updateManyLinks(data: LinkUpdateManyMutationInput!, where: LinkWhereInput): BatchPayload!
-  upsertLink(where: LinkWhereUniqueInput!, create: LinkCreateInput!, update: LinkUpdateInput!): Link!
-  deleteLink(where: LinkWhereUniqueInput!): Link
-  deleteManyLinks(where: LinkWhereInput): BatchPayload!
   createMare(data: MareCreateInput!): Mare!
   updateMare(data: MareUpdateInput!, where: MareWhereUniqueInput!): Mare
   updateManyMares(data: MareUpdateManyMutationInput!, where: MareWhereInput): BatchPayload!
@@ -812,7 +672,7 @@ type Poisson {
   createdAt: DateTime!
   mare: Mare!
   isGros: Boolean
-  isCanardvore: Boolean
+  isCanarovore: Boolean
 }
 
 type PoissonConnection {
@@ -825,7 +685,7 @@ input PoissonCreateInput {
   id: ID
   mare: MareCreateOneWithoutPoissonsInput!
   isGros: Boolean
-  isCanardvore: Boolean
+  isCanarovore: Boolean
 }
 
 input PoissonCreateManyWithoutMareInput {
@@ -836,7 +696,7 @@ input PoissonCreateManyWithoutMareInput {
 input PoissonCreateWithoutMareInput {
   id: ID
   isGros: Boolean
-  isCanardvore: Boolean
+  isCanarovore: Boolean
 }
 
 type PoissonEdge {
@@ -851,15 +711,15 @@ enum PoissonOrderByInput {
   createdAt_DESC
   isGros_ASC
   isGros_DESC
-  isCanardvore_ASC
-  isCanardvore_DESC
+  isCanarovore_ASC
+  isCanarovore_DESC
 }
 
 type PoissonPreviousValues {
   id: ID!
   createdAt: DateTime!
   isGros: Boolean
-  isCanardvore: Boolean
+  isCanarovore: Boolean
 }
 
 input PoissonScalarWhereInput {
@@ -887,8 +747,8 @@ input PoissonScalarWhereInput {
   createdAt_gte: DateTime
   isGros: Boolean
   isGros_not: Boolean
-  isCanardvore: Boolean
-  isCanardvore_not: Boolean
+  isCanarovore: Boolean
+  isCanarovore_not: Boolean
   AND: [PoissonScalarWhereInput!]
   OR: [PoissonScalarWhereInput!]
   NOT: [PoissonScalarWhereInput!]
@@ -915,17 +775,17 @@ input PoissonSubscriptionWhereInput {
 input PoissonUpdateInput {
   mare: MareUpdateOneRequiredWithoutPoissonsInput
   isGros: Boolean
-  isCanardvore: Boolean
+  isCanarovore: Boolean
 }
 
 input PoissonUpdateManyDataInput {
   isGros: Boolean
-  isCanardvore: Boolean
+  isCanarovore: Boolean
 }
 
 input PoissonUpdateManyMutationInput {
   isGros: Boolean
-  isCanardvore: Boolean
+  isCanarovore: Boolean
 }
 
 input PoissonUpdateManyWithoutMareInput {
@@ -947,7 +807,7 @@ input PoissonUpdateManyWithWhereNestedInput {
 
 input PoissonUpdateWithoutMareDataInput {
   isGros: Boolean
-  isCanardvore: Boolean
+  isCanarovore: Boolean
 }
 
 input PoissonUpdateWithWhereUniqueWithoutMareInput {
@@ -987,8 +847,8 @@ input PoissonWhereInput {
   mare: MareWhereInput
   isGros: Boolean
   isGros_not: Boolean
-  isCanardvore: Boolean
-  isCanardvore_not: Boolean
+  isCanarovore: Boolean
+  isCanarovore_not: Boolean
   AND: [PoissonWhereInput!]
   OR: [PoissonWhereInput!]
   NOT: [PoissonWhereInput!]
@@ -1002,9 +862,6 @@ type Query {
   canard(where: CanardWhereUniqueInput!): Canard
   canards(where: CanardWhereInput, orderBy: CanardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Canard]!
   canardsConnection(where: CanardWhereInput, orderBy: CanardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CanardConnection!
-  link(where: LinkWhereUniqueInput!): Link
-  links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link]!
-  linksConnection(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LinkConnection!
   mare(where: MareWhereUniqueInput!): Mare
   mares(where: MareWhereInput, orderBy: MareOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Mare]!
   maresConnection(where: MareWhereInput, orderBy: MareOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MareConnection!
@@ -1019,7 +876,6 @@ type Query {
 
 type Subscription {
   canard(where: CanardSubscriptionWhereInput): CanardSubscriptionPayload
-  link(where: LinkSubscriptionWhereInput): LinkSubscriptionPayload
   mare(where: MareSubscriptionWhereInput): MareSubscriptionPayload
   plaine(where: PlaineSubscriptionWhereInput): PlaineSubscriptionPayload
   poisson(where: PoissonSubscriptionWhereInput): PoissonSubscriptionPayload
