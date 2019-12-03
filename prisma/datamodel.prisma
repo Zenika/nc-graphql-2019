@@ -4,3 +4,39 @@ type Link {
   description: String!
   url: String!
 }
+
+type Plaine {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  mares: [Mare]
+}
+
+type Mare {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  nom: String
+  canards: [Canard]
+  poissons: [Poisson]
+}
+
+interface Animal {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  nom: String
+  mare: Mare
+}
+
+type Canard implements Animal {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  nom: String
+  isAffame: Boolean
+}
+
+type Poisson implements Animal {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  nom: String
+  isGros: Boolean
+  isCanardvore: Boolean
+}
