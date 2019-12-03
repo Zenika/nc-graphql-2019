@@ -30,6 +30,7 @@ type BatchPayload {
 type Canard {
   id: ID!
   createdAt: DateTime!
+  mare: Mare!
   nom: String
   isAffame: Boolean
 }
@@ -42,13 +43,20 @@ type CanardConnection {
 
 input CanardCreateInput {
   id: ID
+  mare: MareCreateOneWithoutCanardsInput!
   nom: String
   isAffame: Boolean
 }
 
-input CanardCreateManyInput {
-  create: [CanardCreateInput!]
+input CanardCreateManyWithoutMareInput {
+  create: [CanardCreateWithoutMareInput!]
   connect: [CanardWhereUniqueInput!]
+}
+
+input CanardCreateWithoutMareInput {
+  id: ID
+  nom: String
+  isAffame: Boolean
 }
 
 type CanardEdge {
@@ -136,12 +144,8 @@ input CanardSubscriptionWhereInput {
   NOT: [CanardSubscriptionWhereInput!]
 }
 
-input CanardUpdateDataInput {
-  nom: String
-  isAffame: Boolean
-}
-
 input CanardUpdateInput {
+  mare: MareUpdateOneRequiredWithoutCanardsInput
   nom: String
   isAffame: Boolean
 }
@@ -151,21 +155,21 @@ input CanardUpdateManyDataInput {
   isAffame: Boolean
 }
 
-input CanardUpdateManyInput {
-  create: [CanardCreateInput!]
-  update: [CanardUpdateWithWhereUniqueNestedInput!]
-  upsert: [CanardUpsertWithWhereUniqueNestedInput!]
+input CanardUpdateManyMutationInput {
+  nom: String
+  isAffame: Boolean
+}
+
+input CanardUpdateManyWithoutMareInput {
+  create: [CanardCreateWithoutMareInput!]
   delete: [CanardWhereUniqueInput!]
   connect: [CanardWhereUniqueInput!]
   set: [CanardWhereUniqueInput!]
   disconnect: [CanardWhereUniqueInput!]
+  update: [CanardUpdateWithWhereUniqueWithoutMareInput!]
+  upsert: [CanardUpsertWithWhereUniqueWithoutMareInput!]
   deleteMany: [CanardScalarWhereInput!]
   updateMany: [CanardUpdateManyWithWhereNestedInput!]
-}
-
-input CanardUpdateManyMutationInput {
-  nom: String
-  isAffame: Boolean
 }
 
 input CanardUpdateManyWithWhereNestedInput {
@@ -173,15 +177,20 @@ input CanardUpdateManyWithWhereNestedInput {
   data: CanardUpdateManyDataInput!
 }
 
-input CanardUpdateWithWhereUniqueNestedInput {
-  where: CanardWhereUniqueInput!
-  data: CanardUpdateDataInput!
+input CanardUpdateWithoutMareDataInput {
+  nom: String
+  isAffame: Boolean
 }
 
-input CanardUpsertWithWhereUniqueNestedInput {
+input CanardUpdateWithWhereUniqueWithoutMareInput {
   where: CanardWhereUniqueInput!
-  update: CanardUpdateDataInput!
-  create: CanardCreateInput!
+  data: CanardUpdateWithoutMareDataInput!
+}
+
+input CanardUpsertWithWhereUniqueWithoutMareInput {
+  where: CanardWhereUniqueInput!
+  update: CanardUpdateWithoutMareDataInput!
+  create: CanardCreateWithoutMareInput!
 }
 
 input CanardWhereInput {
@@ -207,6 +216,7 @@ input CanardWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  mare: MareWhereInput
   nom: String
   nom_not: String
   nom_in: [String!]
@@ -370,6 +380,7 @@ type Mare {
   id: ID!
   createdAt: DateTime!
   nom: String
+  plaine: Plaine!
   canards(where: CanardWhereInput, orderBy: CanardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Canard!]
   poissons(where: PoissonWhereInput, orderBy: PoissonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Poisson!]
 }
@@ -383,13 +394,45 @@ type MareConnection {
 input MareCreateInput {
   id: ID
   nom: String
-  canards: CanardCreateManyInput
-  poissons: PoissonCreateManyInput
+  plaine: PlaineCreateOneWithoutMaresInput!
+  canards: CanardCreateManyWithoutMareInput
+  poissons: PoissonCreateManyWithoutMareInput
 }
 
-input MareCreateManyInput {
-  create: [MareCreateInput!]
+input MareCreateManyWithoutPlaineInput {
+  create: [MareCreateWithoutPlaineInput!]
   connect: [MareWhereUniqueInput!]
+}
+
+input MareCreateOneWithoutCanardsInput {
+  create: MareCreateWithoutCanardsInput
+  connect: MareWhereUniqueInput
+}
+
+input MareCreateOneWithoutPoissonsInput {
+  create: MareCreateWithoutPoissonsInput
+  connect: MareWhereUniqueInput
+}
+
+input MareCreateWithoutCanardsInput {
+  id: ID
+  nom: String
+  plaine: PlaineCreateOneWithoutMaresInput!
+  poissons: PoissonCreateManyWithoutMareInput
+}
+
+input MareCreateWithoutPlaineInput {
+  id: ID
+  nom: String
+  canards: CanardCreateManyWithoutMareInput
+  poissons: PoissonCreateManyWithoutMareInput
+}
+
+input MareCreateWithoutPoissonsInput {
+  id: ID
+  nom: String
+  plaine: PlaineCreateOneWithoutMaresInput!
+  canards: CanardCreateManyWithoutMareInput
 }
 
 type MareEdge {
@@ -472,36 +515,31 @@ input MareSubscriptionWhereInput {
   NOT: [MareSubscriptionWhereInput!]
 }
 
-input MareUpdateDataInput {
-  nom: String
-  canards: CanardUpdateManyInput
-  poissons: PoissonUpdateManyInput
-}
-
 input MareUpdateInput {
   nom: String
-  canards: CanardUpdateManyInput
-  poissons: PoissonUpdateManyInput
+  plaine: PlaineUpdateOneRequiredWithoutMaresInput
+  canards: CanardUpdateManyWithoutMareInput
+  poissons: PoissonUpdateManyWithoutMareInput
 }
 
 input MareUpdateManyDataInput {
   nom: String
 }
 
-input MareUpdateManyInput {
-  create: [MareCreateInput!]
-  update: [MareUpdateWithWhereUniqueNestedInput!]
-  upsert: [MareUpsertWithWhereUniqueNestedInput!]
+input MareUpdateManyMutationInput {
+  nom: String
+}
+
+input MareUpdateManyWithoutPlaineInput {
+  create: [MareCreateWithoutPlaineInput!]
   delete: [MareWhereUniqueInput!]
   connect: [MareWhereUniqueInput!]
   set: [MareWhereUniqueInput!]
   disconnect: [MareWhereUniqueInput!]
+  update: [MareUpdateWithWhereUniqueWithoutPlaineInput!]
+  upsert: [MareUpsertWithWhereUniqueWithoutPlaineInput!]
   deleteMany: [MareScalarWhereInput!]
   updateMany: [MareUpdateManyWithWhereNestedInput!]
-}
-
-input MareUpdateManyMutationInput {
-  nom: String
 }
 
 input MareUpdateManyWithWhereNestedInput {
@@ -509,15 +547,57 @@ input MareUpdateManyWithWhereNestedInput {
   data: MareUpdateManyDataInput!
 }
 
-input MareUpdateWithWhereUniqueNestedInput {
-  where: MareWhereUniqueInput!
-  data: MareUpdateDataInput!
+input MareUpdateOneRequiredWithoutCanardsInput {
+  create: MareCreateWithoutCanardsInput
+  update: MareUpdateWithoutCanardsDataInput
+  upsert: MareUpsertWithoutCanardsInput
+  connect: MareWhereUniqueInput
 }
 
-input MareUpsertWithWhereUniqueNestedInput {
+input MareUpdateOneRequiredWithoutPoissonsInput {
+  create: MareCreateWithoutPoissonsInput
+  update: MareUpdateWithoutPoissonsDataInput
+  upsert: MareUpsertWithoutPoissonsInput
+  connect: MareWhereUniqueInput
+}
+
+input MareUpdateWithoutCanardsDataInput {
+  nom: String
+  plaine: PlaineUpdateOneRequiredWithoutMaresInput
+  poissons: PoissonUpdateManyWithoutMareInput
+}
+
+input MareUpdateWithoutPlaineDataInput {
+  nom: String
+  canards: CanardUpdateManyWithoutMareInput
+  poissons: PoissonUpdateManyWithoutMareInput
+}
+
+input MareUpdateWithoutPoissonsDataInput {
+  nom: String
+  plaine: PlaineUpdateOneRequiredWithoutMaresInput
+  canards: CanardUpdateManyWithoutMareInput
+}
+
+input MareUpdateWithWhereUniqueWithoutPlaineInput {
   where: MareWhereUniqueInput!
-  update: MareUpdateDataInput!
-  create: MareCreateInput!
+  data: MareUpdateWithoutPlaineDataInput!
+}
+
+input MareUpsertWithoutCanardsInput {
+  update: MareUpdateWithoutCanardsDataInput!
+  create: MareCreateWithoutCanardsInput!
+}
+
+input MareUpsertWithoutPoissonsInput {
+  update: MareUpdateWithoutPoissonsDataInput!
+  create: MareCreateWithoutPoissonsInput!
+}
+
+input MareUpsertWithWhereUniqueWithoutPlaineInput {
+  where: MareWhereUniqueInput!
+  update: MareUpdateWithoutPlaineDataInput!
+  create: MareCreateWithoutPlaineInput!
 }
 
 input MareWhereInput {
@@ -557,6 +637,7 @@ input MareWhereInput {
   nom_not_starts_with: String
   nom_ends_with: String
   nom_not_ends_with: String
+  plaine: PlaineWhereInput
   canards_every: CanardWhereInput
   canards_some: CanardWhereInput
   canards_none: CanardWhereInput
@@ -635,7 +716,16 @@ type PlaineConnection {
 
 input PlaineCreateInput {
   id: ID
-  mares: MareCreateManyInput
+  mares: MareCreateManyWithoutPlaineInput
+}
+
+input PlaineCreateOneWithoutMaresInput {
+  create: PlaineCreateWithoutMaresInput
+  connect: PlaineWhereUniqueInput
+}
+
+input PlaineCreateWithoutMaresInput {
+  id: ID
 }
 
 type PlaineEdge {
@@ -674,7 +764,12 @@ input PlaineSubscriptionWhereInput {
 }
 
 input PlaineUpdateInput {
-  mares: MareUpdateManyInput
+  mares: MareUpdateManyWithoutPlaineInput
+}
+
+input PlaineUpdateOneRequiredWithoutMaresInput {
+  create: PlaineCreateWithoutMaresInput
+  connect: PlaineWhereUniqueInput
 }
 
 input PlaineWhereInput {
@@ -715,7 +810,7 @@ input PlaineWhereUniqueInput {
 type Poisson {
   id: ID!
   createdAt: DateTime!
-  nom: String
+  mare: Mare!
   isGros: Boolean
   isCanardvore: Boolean
 }
@@ -728,14 +823,20 @@ type PoissonConnection {
 
 input PoissonCreateInput {
   id: ID
-  nom: String
+  mare: MareCreateOneWithoutPoissonsInput!
   isGros: Boolean
   isCanardvore: Boolean
 }
 
-input PoissonCreateManyInput {
-  create: [PoissonCreateInput!]
+input PoissonCreateManyWithoutMareInput {
+  create: [PoissonCreateWithoutMareInput!]
   connect: [PoissonWhereUniqueInput!]
+}
+
+input PoissonCreateWithoutMareInput {
+  id: ID
+  isGros: Boolean
+  isCanardvore: Boolean
 }
 
 type PoissonEdge {
@@ -748,8 +849,6 @@ enum PoissonOrderByInput {
   id_DESC
   createdAt_ASC
   createdAt_DESC
-  nom_ASC
-  nom_DESC
   isGros_ASC
   isGros_DESC
   isCanardvore_ASC
@@ -759,7 +858,6 @@ enum PoissonOrderByInput {
 type PoissonPreviousValues {
   id: ID!
   createdAt: DateTime!
-  nom: String
   isGros: Boolean
   isCanardvore: Boolean
 }
@@ -787,20 +885,6 @@ input PoissonScalarWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
-  nom: String
-  nom_not: String
-  nom_in: [String!]
-  nom_not_in: [String!]
-  nom_lt: String
-  nom_lte: String
-  nom_gt: String
-  nom_gte: String
-  nom_contains: String
-  nom_not_contains: String
-  nom_starts_with: String
-  nom_not_starts_with: String
-  nom_ends_with: String
-  nom_not_ends_with: String
   isGros: Boolean
   isGros_not: Boolean
   isCanardvore: Boolean
@@ -828,40 +912,32 @@ input PoissonSubscriptionWhereInput {
   NOT: [PoissonSubscriptionWhereInput!]
 }
 
-input PoissonUpdateDataInput {
-  nom: String
-  isGros: Boolean
-  isCanardvore: Boolean
-}
-
 input PoissonUpdateInput {
-  nom: String
+  mare: MareUpdateOneRequiredWithoutPoissonsInput
   isGros: Boolean
   isCanardvore: Boolean
 }
 
 input PoissonUpdateManyDataInput {
-  nom: String
   isGros: Boolean
   isCanardvore: Boolean
 }
 
-input PoissonUpdateManyInput {
-  create: [PoissonCreateInput!]
-  update: [PoissonUpdateWithWhereUniqueNestedInput!]
-  upsert: [PoissonUpsertWithWhereUniqueNestedInput!]
+input PoissonUpdateManyMutationInput {
+  isGros: Boolean
+  isCanardvore: Boolean
+}
+
+input PoissonUpdateManyWithoutMareInput {
+  create: [PoissonCreateWithoutMareInput!]
   delete: [PoissonWhereUniqueInput!]
   connect: [PoissonWhereUniqueInput!]
   set: [PoissonWhereUniqueInput!]
   disconnect: [PoissonWhereUniqueInput!]
+  update: [PoissonUpdateWithWhereUniqueWithoutMareInput!]
+  upsert: [PoissonUpsertWithWhereUniqueWithoutMareInput!]
   deleteMany: [PoissonScalarWhereInput!]
   updateMany: [PoissonUpdateManyWithWhereNestedInput!]
-}
-
-input PoissonUpdateManyMutationInput {
-  nom: String
-  isGros: Boolean
-  isCanardvore: Boolean
 }
 
 input PoissonUpdateManyWithWhereNestedInput {
@@ -869,15 +945,20 @@ input PoissonUpdateManyWithWhereNestedInput {
   data: PoissonUpdateManyDataInput!
 }
 
-input PoissonUpdateWithWhereUniqueNestedInput {
-  where: PoissonWhereUniqueInput!
-  data: PoissonUpdateDataInput!
+input PoissonUpdateWithoutMareDataInput {
+  isGros: Boolean
+  isCanardvore: Boolean
 }
 
-input PoissonUpsertWithWhereUniqueNestedInput {
+input PoissonUpdateWithWhereUniqueWithoutMareInput {
   where: PoissonWhereUniqueInput!
-  update: PoissonUpdateDataInput!
-  create: PoissonCreateInput!
+  data: PoissonUpdateWithoutMareDataInput!
+}
+
+input PoissonUpsertWithWhereUniqueWithoutMareInput {
+  where: PoissonWhereUniqueInput!
+  update: PoissonUpdateWithoutMareDataInput!
+  create: PoissonCreateWithoutMareInput!
 }
 
 input PoissonWhereInput {
@@ -903,20 +984,7 @@ input PoissonWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
-  nom: String
-  nom_not: String
-  nom_in: [String!]
-  nom_not_in: [String!]
-  nom_lt: String
-  nom_lte: String
-  nom_gt: String
-  nom_gte: String
-  nom_contains: String
-  nom_not_contains: String
-  nom_starts_with: String
-  nom_not_starts_with: String
-  nom_ends_with: String
-  nom_not_ends_with: String
+  mare: MareWhereInput
   isGros: Boolean
   isGros_not: Boolean
   isCanardvore: Boolean

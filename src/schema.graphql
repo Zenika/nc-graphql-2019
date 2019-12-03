@@ -2,19 +2,14 @@ type Query {
   info: String!
   feed: [Link!]!
   link(id: ID!): Link
-  plaine: Plaine!
+  plaine(id: ID!): Plaine
+  plaines: [Plaine!]!
   mare(id: ID!): Mare
-  mares: [Mare!]!
+  mares(plaineId: ID!): [Mare!]!
   canard(mareId: ID!): [Canard]
   canards: [Canard]
   poisson: [Poisson]
   poissons(mareId: ID!): [Poisson]
-  
-  hasCanards(mareId: ID!): Boolean
-  hasPoissons(mareId: ID!): Boolean
-  isAffame(canardId: ID!): Boolean
-  isGros(poissonId: ID!): Boolean
-  isCanardvore(poissonId: ID!): Boolean
 }
 
 type Mutation {
@@ -22,21 +17,16 @@ type Mutation {
   updateLink(id: ID!, url: String, description: String): Link
   deleteLink(id: ID!): Link
 
-  createPlaine(): Plaine
-  createMare(plaineId: ID!): Mare
-  addCanard(mareID: ID!): Canard
-  addPoissons(mareID: ID!, quantite: Int!): [Poisson]
-  moveCanard(destinationMareID: ID!, canardID: ID!): Canard
+  createPlaine: Plaine
+  createMare(plaineId: ID!, nom: String): Mare
+  addCanard(mareId: ID!, nom: String): Canard
+  addPoissons(mareId: ID!, quantite: Int!): [Poisson]
+  eatPoisson(mareId: ID!): Canard
+  moveCanard(destinationMareId: ID!, canardId: ID!): Canard
 }
 
 type Subscriptions {
   nouveauCanard(mareID: ID): Canard
-}
-
-type Link {
-  id: ID!
-  description: String!
-  url: String!
 }
 
 type Plaine {
@@ -47,27 +37,21 @@ type Plaine {
 type Mare {
   id: ID!
   nom: String
+  plaine: Plaine!
   canards: [Canard]
   poissons: [Poisson]
 }
 
-interface Animal {
+type Canard {
   id: ID!
+  mare: Mare!
   nom: String
-  mare: Mare
-}
-
-type Canard implements Animal {
-  id: ID!
-  nom: String
-  mare: Mare
   isAffame: Boolean
 }
 
-type Poisson implements Animal {
+type Poisson {
   id: ID!
-  nom: String
-  mare: Mare
+  mare: Mare!
   isGros: Boolean
   isCanardvore: Boolean
 }
