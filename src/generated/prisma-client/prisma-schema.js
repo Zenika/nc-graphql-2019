@@ -3,7 +3,19 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateLink {
+/* GraphQL */ `type AggregateCanard {
+  count: Int!
+}
+
+type AggregateMare {
+  count: Int!
+}
+
+type AggregatePlaine {
+  count: Int!
+}
+
+type AggregatePoisson {
   count: Int!
 }
 
@@ -11,79 +23,62 @@ type BatchPayload {
   count: Long!
 }
 
-scalar DateTime
-
-type Link {
+type Canard {
   id: ID!
   createdAt: DateTime!
-  description: String!
-  url: String!
+  mare: Mare!
+  nom: String
+  isAffame: Boolean
 }
 
-type LinkConnection {
+type CanardConnection {
   pageInfo: PageInfo!
-  edges: [LinkEdge]!
-  aggregate: AggregateLink!
+  edges: [CanardEdge]!
+  aggregate: AggregateCanard!
 }
 
-input LinkCreateInput {
+input CanardCreateInput {
   id: ID
-  description: String!
-  url: String!
+  mare: MareCreateOneWithoutCanardsInput!
+  nom: String
+  isAffame: Boolean
 }
 
-type LinkEdge {
-  node: Link!
+input CanardCreateManyWithoutMareInput {
+  create: [CanardCreateWithoutMareInput!]
+  connect: [CanardWhereUniqueInput!]
+}
+
+input CanardCreateWithoutMareInput {
+  id: ID
+  nom: String
+  isAffame: Boolean
+}
+
+type CanardEdge {
+  node: Canard!
   cursor: String!
 }
 
-enum LinkOrderByInput {
+enum CanardOrderByInput {
   id_ASC
   id_DESC
   createdAt_ASC
   createdAt_DESC
-  description_ASC
-  description_DESC
-  url_ASC
-  url_DESC
+  nom_ASC
+  nom_DESC
+  isAffame_ASC
+  isAffame_DESC
 }
 
-type LinkPreviousValues {
+type CanardPreviousValues {
   id: ID!
   createdAt: DateTime!
-  description: String!
-  url: String!
+  nom: String
+  isAffame: Boolean
 }
 
-type LinkSubscriptionPayload {
-  mutation: MutationType!
-  node: Link
-  updatedFields: [String!]
-  previousValues: LinkPreviousValues
-}
-
-input LinkSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: LinkWhereInput
-  AND: [LinkSubscriptionWhereInput!]
-  OR: [LinkSubscriptionWhereInput!]
-  NOT: [LinkSubscriptionWhereInput!]
-}
-
-input LinkUpdateInput {
-  description: String
-  url: String
-}
-
-input LinkUpdateManyMutationInput {
-  description: String
-  url: String
-}
-
-input LinkWhereInput {
+input CanardScalarWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -106,52 +101,448 @@ input LinkWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
-  url: String
-  url_not: String
-  url_in: [String!]
-  url_not_in: [String!]
-  url_lt: String
-  url_lte: String
-  url_gt: String
-  url_gte: String
-  url_contains: String
-  url_not_contains: String
-  url_starts_with: String
-  url_not_starts_with: String
-  url_ends_with: String
-  url_not_ends_with: String
-  AND: [LinkWhereInput!]
-  OR: [LinkWhereInput!]
-  NOT: [LinkWhereInput!]
+  nom: String
+  nom_not: String
+  nom_in: [String!]
+  nom_not_in: [String!]
+  nom_lt: String
+  nom_lte: String
+  nom_gt: String
+  nom_gte: String
+  nom_contains: String
+  nom_not_contains: String
+  nom_starts_with: String
+  nom_not_starts_with: String
+  nom_ends_with: String
+  nom_not_ends_with: String
+  isAffame: Boolean
+  isAffame_not: Boolean
+  AND: [CanardScalarWhereInput!]
+  OR: [CanardScalarWhereInput!]
+  NOT: [CanardScalarWhereInput!]
 }
 
-input LinkWhereUniqueInput {
+type CanardSubscriptionPayload {
+  mutation: MutationType!
+  node: Canard
+  updatedFields: [String!]
+  previousValues: CanardPreviousValues
+}
+
+input CanardSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CanardWhereInput
+  AND: [CanardSubscriptionWhereInput!]
+  OR: [CanardSubscriptionWhereInput!]
+  NOT: [CanardSubscriptionWhereInput!]
+}
+
+input CanardUpdateInput {
+  mare: MareUpdateOneRequiredWithoutCanardsInput
+  nom: String
+  isAffame: Boolean
+}
+
+input CanardUpdateManyDataInput {
+  nom: String
+  isAffame: Boolean
+}
+
+input CanardUpdateManyMutationInput {
+  nom: String
+  isAffame: Boolean
+}
+
+input CanardUpdateManyWithoutMareInput {
+  create: [CanardCreateWithoutMareInput!]
+  delete: [CanardWhereUniqueInput!]
+  connect: [CanardWhereUniqueInput!]
+  set: [CanardWhereUniqueInput!]
+  disconnect: [CanardWhereUniqueInput!]
+  update: [CanardUpdateWithWhereUniqueWithoutMareInput!]
+  upsert: [CanardUpsertWithWhereUniqueWithoutMareInput!]
+  deleteMany: [CanardScalarWhereInput!]
+  updateMany: [CanardUpdateManyWithWhereNestedInput!]
+}
+
+input CanardUpdateManyWithWhereNestedInput {
+  where: CanardScalarWhereInput!
+  data: CanardUpdateManyDataInput!
+}
+
+input CanardUpdateWithoutMareDataInput {
+  nom: String
+  isAffame: Boolean
+}
+
+input CanardUpdateWithWhereUniqueWithoutMareInput {
+  where: CanardWhereUniqueInput!
+  data: CanardUpdateWithoutMareDataInput!
+}
+
+input CanardUpsertWithWhereUniqueWithoutMareInput {
+  where: CanardWhereUniqueInput!
+  update: CanardUpdateWithoutMareDataInput!
+  create: CanardCreateWithoutMareInput!
+}
+
+input CanardWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  mare: MareWhereInput
+  nom: String
+  nom_not: String
+  nom_in: [String!]
+  nom_not_in: [String!]
+  nom_lt: String
+  nom_lte: String
+  nom_gt: String
+  nom_gte: String
+  nom_contains: String
+  nom_not_contains: String
+  nom_starts_with: String
+  nom_not_starts_with: String
+  nom_ends_with: String
+  nom_not_ends_with: String
+  isAffame: Boolean
+  isAffame_not: Boolean
+  AND: [CanardWhereInput!]
+  OR: [CanardWhereInput!]
+  NOT: [CanardWhereInput!]
+}
+
+input CanardWhereUniqueInput {
   id: ID
 }
 
+scalar DateTime
+
 scalar Long
 
+type Mare {
+  id: ID!
+  createdAt: DateTime!
+  nom: String
+  plaine: Plaine!
+  canards(where: CanardWhereInput, orderBy: CanardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Canard!]
+  poissons(where: PoissonWhereInput, orderBy: PoissonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Poisson!]
+}
+
+type MareConnection {
+  pageInfo: PageInfo!
+  edges: [MareEdge]!
+  aggregate: AggregateMare!
+}
+
+input MareCreateInput {
+  id: ID
+  nom: String
+  plaine: PlaineCreateOneWithoutMaresInput!
+  canards: CanardCreateManyWithoutMareInput
+  poissons: PoissonCreateManyWithoutMareInput
+}
+
+input MareCreateManyWithoutPlaineInput {
+  create: [MareCreateWithoutPlaineInput!]
+  connect: [MareWhereUniqueInput!]
+}
+
+input MareCreateOneWithoutCanardsInput {
+  create: MareCreateWithoutCanardsInput
+  connect: MareWhereUniqueInput
+}
+
+input MareCreateOneWithoutPoissonsInput {
+  create: MareCreateWithoutPoissonsInput
+  connect: MareWhereUniqueInput
+}
+
+input MareCreateWithoutCanardsInput {
+  id: ID
+  nom: String
+  plaine: PlaineCreateOneWithoutMaresInput!
+  poissons: PoissonCreateManyWithoutMareInput
+}
+
+input MareCreateWithoutPlaineInput {
+  id: ID
+  nom: String
+  canards: CanardCreateManyWithoutMareInput
+  poissons: PoissonCreateManyWithoutMareInput
+}
+
+input MareCreateWithoutPoissonsInput {
+  id: ID
+  nom: String
+  plaine: PlaineCreateOneWithoutMaresInput!
+  canards: CanardCreateManyWithoutMareInput
+}
+
+type MareEdge {
+  node: Mare!
+  cursor: String!
+}
+
+enum MareOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  nom_ASC
+  nom_DESC
+}
+
+type MarePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  nom: String
+}
+
+input MareScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  nom: String
+  nom_not: String
+  nom_in: [String!]
+  nom_not_in: [String!]
+  nom_lt: String
+  nom_lte: String
+  nom_gt: String
+  nom_gte: String
+  nom_contains: String
+  nom_not_contains: String
+  nom_starts_with: String
+  nom_not_starts_with: String
+  nom_ends_with: String
+  nom_not_ends_with: String
+  AND: [MareScalarWhereInput!]
+  OR: [MareScalarWhereInput!]
+  NOT: [MareScalarWhereInput!]
+}
+
+type MareSubscriptionPayload {
+  mutation: MutationType!
+  node: Mare
+  updatedFields: [String!]
+  previousValues: MarePreviousValues
+}
+
+input MareSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MareWhereInput
+  AND: [MareSubscriptionWhereInput!]
+  OR: [MareSubscriptionWhereInput!]
+  NOT: [MareSubscriptionWhereInput!]
+}
+
+input MareUpdateInput {
+  nom: String
+  plaine: PlaineUpdateOneRequiredWithoutMaresInput
+  canards: CanardUpdateManyWithoutMareInput
+  poissons: PoissonUpdateManyWithoutMareInput
+}
+
+input MareUpdateManyDataInput {
+  nom: String
+}
+
+input MareUpdateManyMutationInput {
+  nom: String
+}
+
+input MareUpdateManyWithoutPlaineInput {
+  create: [MareCreateWithoutPlaineInput!]
+  delete: [MareWhereUniqueInput!]
+  connect: [MareWhereUniqueInput!]
+  set: [MareWhereUniqueInput!]
+  disconnect: [MareWhereUniqueInput!]
+  update: [MareUpdateWithWhereUniqueWithoutPlaineInput!]
+  upsert: [MareUpsertWithWhereUniqueWithoutPlaineInput!]
+  deleteMany: [MareScalarWhereInput!]
+  updateMany: [MareUpdateManyWithWhereNestedInput!]
+}
+
+input MareUpdateManyWithWhereNestedInput {
+  where: MareScalarWhereInput!
+  data: MareUpdateManyDataInput!
+}
+
+input MareUpdateOneRequiredWithoutCanardsInput {
+  create: MareCreateWithoutCanardsInput
+  update: MareUpdateWithoutCanardsDataInput
+  upsert: MareUpsertWithoutCanardsInput
+  connect: MareWhereUniqueInput
+}
+
+input MareUpdateOneRequiredWithoutPoissonsInput {
+  create: MareCreateWithoutPoissonsInput
+  update: MareUpdateWithoutPoissonsDataInput
+  upsert: MareUpsertWithoutPoissonsInput
+  connect: MareWhereUniqueInput
+}
+
+input MareUpdateWithoutCanardsDataInput {
+  nom: String
+  plaine: PlaineUpdateOneRequiredWithoutMaresInput
+  poissons: PoissonUpdateManyWithoutMareInput
+}
+
+input MareUpdateWithoutPlaineDataInput {
+  nom: String
+  canards: CanardUpdateManyWithoutMareInput
+  poissons: PoissonUpdateManyWithoutMareInput
+}
+
+input MareUpdateWithoutPoissonsDataInput {
+  nom: String
+  plaine: PlaineUpdateOneRequiredWithoutMaresInput
+  canards: CanardUpdateManyWithoutMareInput
+}
+
+input MareUpdateWithWhereUniqueWithoutPlaineInput {
+  where: MareWhereUniqueInput!
+  data: MareUpdateWithoutPlaineDataInput!
+}
+
+input MareUpsertWithoutCanardsInput {
+  update: MareUpdateWithoutCanardsDataInput!
+  create: MareCreateWithoutCanardsInput!
+}
+
+input MareUpsertWithoutPoissonsInput {
+  update: MareUpdateWithoutPoissonsDataInput!
+  create: MareCreateWithoutPoissonsInput!
+}
+
+input MareUpsertWithWhereUniqueWithoutPlaineInput {
+  where: MareWhereUniqueInput!
+  update: MareUpdateWithoutPlaineDataInput!
+  create: MareCreateWithoutPlaineInput!
+}
+
+input MareWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  nom: String
+  nom_not: String
+  nom_in: [String!]
+  nom_not_in: [String!]
+  nom_lt: String
+  nom_lte: String
+  nom_gt: String
+  nom_gte: String
+  nom_contains: String
+  nom_not_contains: String
+  nom_starts_with: String
+  nom_not_starts_with: String
+  nom_ends_with: String
+  nom_not_ends_with: String
+  plaine: PlaineWhereInput
+  canards_every: CanardWhereInput
+  canards_some: CanardWhereInput
+  canards_none: CanardWhereInput
+  poissons_every: PoissonWhereInput
+  poissons_some: PoissonWhereInput
+  poissons_none: PoissonWhereInput
+  AND: [MareWhereInput!]
+  OR: [MareWhereInput!]
+  NOT: [MareWhereInput!]
+}
+
+input MareWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
-  createLink(data: LinkCreateInput!): Link!
-  updateLink(data: LinkUpdateInput!, where: LinkWhereUniqueInput!): Link
-  updateManyLinks(data: LinkUpdateManyMutationInput!, where: LinkWhereInput): BatchPayload!
-  upsertLink(where: LinkWhereUniqueInput!, create: LinkCreateInput!, update: LinkUpdateInput!): Link!
-  deleteLink(where: LinkWhereUniqueInput!): Link
-  deleteManyLinks(where: LinkWhereInput): BatchPayload!
+  createCanard(data: CanardCreateInput!): Canard!
+  updateCanard(data: CanardUpdateInput!, where: CanardWhereUniqueInput!): Canard
+  updateManyCanards(data: CanardUpdateManyMutationInput!, where: CanardWhereInput): BatchPayload!
+  upsertCanard(where: CanardWhereUniqueInput!, create: CanardCreateInput!, update: CanardUpdateInput!): Canard!
+  deleteCanard(where: CanardWhereUniqueInput!): Canard
+  deleteManyCanards(where: CanardWhereInput): BatchPayload!
+  createMare(data: MareCreateInput!): Mare!
+  updateMare(data: MareUpdateInput!, where: MareWhereUniqueInput!): Mare
+  updateManyMares(data: MareUpdateManyMutationInput!, where: MareWhereInput): BatchPayload!
+  upsertMare(where: MareWhereUniqueInput!, create: MareCreateInput!, update: MareUpdateInput!): Mare!
+  deleteMare(where: MareWhereUniqueInput!): Mare
+  deleteManyMares(where: MareWhereInput): BatchPayload!
+  createPlaine(data: PlaineCreateInput!): Plaine!
+  updatePlaine(data: PlaineUpdateInput!, where: PlaineWhereUniqueInput!): Plaine
+  upsertPlaine(where: PlaineWhereUniqueInput!, create: PlaineCreateInput!, update: PlaineUpdateInput!): Plaine!
+  deletePlaine(where: PlaineWhereUniqueInput!): Plaine
+  deleteManyPlaines(where: PlaineWhereInput): BatchPayload!
+  createPoisson(data: PoissonCreateInput!): Poisson!
+  updatePoisson(data: PoissonUpdateInput!, where: PoissonWhereUniqueInput!): Poisson
+  updateManyPoissons(data: PoissonUpdateManyMutationInput!, where: PoissonWhereInput): BatchPayload!
+  upsertPoisson(where: PoissonWhereUniqueInput!, create: PoissonCreateInput!, update: PoissonUpdateInput!): Poisson!
+  deletePoisson(where: PoissonWhereUniqueInput!): Poisson
+  deleteManyPoissons(where: PoissonWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -171,15 +562,323 @@ type PageInfo {
   endCursor: String
 }
 
+type Plaine {
+  id: ID!
+  createdAt: DateTime!
+  mares(where: MareWhereInput, orderBy: MareOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Mare!]
+}
+
+type PlaineConnection {
+  pageInfo: PageInfo!
+  edges: [PlaineEdge]!
+  aggregate: AggregatePlaine!
+}
+
+input PlaineCreateInput {
+  id: ID
+  mares: MareCreateManyWithoutPlaineInput
+}
+
+input PlaineCreateOneWithoutMaresInput {
+  create: PlaineCreateWithoutMaresInput
+  connect: PlaineWhereUniqueInput
+}
+
+input PlaineCreateWithoutMaresInput {
+  id: ID
+}
+
+type PlaineEdge {
+  node: Plaine!
+  cursor: String!
+}
+
+enum PlaineOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type PlainePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+}
+
+type PlaineSubscriptionPayload {
+  mutation: MutationType!
+  node: Plaine
+  updatedFields: [String!]
+  previousValues: PlainePreviousValues
+}
+
+input PlaineSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PlaineWhereInput
+  AND: [PlaineSubscriptionWhereInput!]
+  OR: [PlaineSubscriptionWhereInput!]
+  NOT: [PlaineSubscriptionWhereInput!]
+}
+
+input PlaineUpdateInput {
+  mares: MareUpdateManyWithoutPlaineInput
+}
+
+input PlaineUpdateOneRequiredWithoutMaresInput {
+  create: PlaineCreateWithoutMaresInput
+  connect: PlaineWhereUniqueInput
+}
+
+input PlaineWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  mares_every: MareWhereInput
+  mares_some: MareWhereInput
+  mares_none: MareWhereInput
+  AND: [PlaineWhereInput!]
+  OR: [PlaineWhereInput!]
+  NOT: [PlaineWhereInput!]
+}
+
+input PlaineWhereUniqueInput {
+  id: ID
+}
+
+type Poisson {
+  id: ID!
+  createdAt: DateTime!
+  mare: Mare!
+  isGros: Boolean
+  isCanarovore: Boolean
+}
+
+type PoissonConnection {
+  pageInfo: PageInfo!
+  edges: [PoissonEdge]!
+  aggregate: AggregatePoisson!
+}
+
+input PoissonCreateInput {
+  id: ID
+  mare: MareCreateOneWithoutPoissonsInput!
+  isGros: Boolean
+  isCanarovore: Boolean
+}
+
+input PoissonCreateManyWithoutMareInput {
+  create: [PoissonCreateWithoutMareInput!]
+  connect: [PoissonWhereUniqueInput!]
+}
+
+input PoissonCreateWithoutMareInput {
+  id: ID
+  isGros: Boolean
+  isCanarovore: Boolean
+}
+
+type PoissonEdge {
+  node: Poisson!
+  cursor: String!
+}
+
+enum PoissonOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  isGros_ASC
+  isGros_DESC
+  isCanarovore_ASC
+  isCanarovore_DESC
+}
+
+type PoissonPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  isGros: Boolean
+  isCanarovore: Boolean
+}
+
+input PoissonScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  isGros: Boolean
+  isGros_not: Boolean
+  isCanarovore: Boolean
+  isCanarovore_not: Boolean
+  AND: [PoissonScalarWhereInput!]
+  OR: [PoissonScalarWhereInput!]
+  NOT: [PoissonScalarWhereInput!]
+}
+
+type PoissonSubscriptionPayload {
+  mutation: MutationType!
+  node: Poisson
+  updatedFields: [String!]
+  previousValues: PoissonPreviousValues
+}
+
+input PoissonSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PoissonWhereInput
+  AND: [PoissonSubscriptionWhereInput!]
+  OR: [PoissonSubscriptionWhereInput!]
+  NOT: [PoissonSubscriptionWhereInput!]
+}
+
+input PoissonUpdateInput {
+  mare: MareUpdateOneRequiredWithoutPoissonsInput
+  isGros: Boolean
+  isCanarovore: Boolean
+}
+
+input PoissonUpdateManyDataInput {
+  isGros: Boolean
+  isCanarovore: Boolean
+}
+
+input PoissonUpdateManyMutationInput {
+  isGros: Boolean
+  isCanarovore: Boolean
+}
+
+input PoissonUpdateManyWithoutMareInput {
+  create: [PoissonCreateWithoutMareInput!]
+  delete: [PoissonWhereUniqueInput!]
+  connect: [PoissonWhereUniqueInput!]
+  set: [PoissonWhereUniqueInput!]
+  disconnect: [PoissonWhereUniqueInput!]
+  update: [PoissonUpdateWithWhereUniqueWithoutMareInput!]
+  upsert: [PoissonUpsertWithWhereUniqueWithoutMareInput!]
+  deleteMany: [PoissonScalarWhereInput!]
+  updateMany: [PoissonUpdateManyWithWhereNestedInput!]
+}
+
+input PoissonUpdateManyWithWhereNestedInput {
+  where: PoissonScalarWhereInput!
+  data: PoissonUpdateManyDataInput!
+}
+
+input PoissonUpdateWithoutMareDataInput {
+  isGros: Boolean
+  isCanarovore: Boolean
+}
+
+input PoissonUpdateWithWhereUniqueWithoutMareInput {
+  where: PoissonWhereUniqueInput!
+  data: PoissonUpdateWithoutMareDataInput!
+}
+
+input PoissonUpsertWithWhereUniqueWithoutMareInput {
+  where: PoissonWhereUniqueInput!
+  update: PoissonUpdateWithoutMareDataInput!
+  create: PoissonCreateWithoutMareInput!
+}
+
+input PoissonWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  mare: MareWhereInput
+  isGros: Boolean
+  isGros_not: Boolean
+  isCanarovore: Boolean
+  isCanarovore_not: Boolean
+  AND: [PoissonWhereInput!]
+  OR: [PoissonWhereInput!]
+  NOT: [PoissonWhereInput!]
+}
+
+input PoissonWhereUniqueInput {
+  id: ID
+}
+
 type Query {
-  link(where: LinkWhereUniqueInput!): Link
-  links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link]!
-  linksConnection(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LinkConnection!
+  canard(where: CanardWhereUniqueInput!): Canard
+  canards(where: CanardWhereInput, orderBy: CanardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Canard]!
+  canardsConnection(where: CanardWhereInput, orderBy: CanardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CanardConnection!
+  mare(where: MareWhereUniqueInput!): Mare
+  mares(where: MareWhereInput, orderBy: MareOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Mare]!
+  maresConnection(where: MareWhereInput, orderBy: MareOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MareConnection!
+  plaine(where: PlaineWhereUniqueInput!): Plaine
+  plaines(where: PlaineWhereInput, orderBy: PlaineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Plaine]!
+  plainesConnection(where: PlaineWhereInput, orderBy: PlaineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaineConnection!
+  poisson(where: PoissonWhereUniqueInput!): Poisson
+  poissons(where: PoissonWhereInput, orderBy: PoissonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Poisson]!
+  poissonsConnection(where: PoissonWhereInput, orderBy: PoissonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PoissonConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
-  link(where: LinkSubscriptionWhereInput): LinkSubscriptionPayload
+  canard(where: CanardSubscriptionWhereInput): CanardSubscriptionPayload
+  mare(where: MareSubscriptionWhereInput): MareSubscriptionPayload
+  plaine(where: PlaineSubscriptionWhereInput): PlaineSubscriptionPayload
+  poisson(where: PoissonSubscriptionWhereInput): PoissonSubscriptionPayload
 }
 `
       }

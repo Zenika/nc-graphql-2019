@@ -1,0 +1,7 @@
+type Query {
+ plaines: [Plaine]
+}
+
+type Plaine {
+  id: ID!
+}
