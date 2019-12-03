@@ -7,6 +7,22 @@ var models = [
   {
     name: "Link",
     embedded: false
+  },
+  {
+    name: "Plaine",
+    embedded: false
+  },
+  {
+    name: "Mare",
+    embedded: false
+  },
+  {
+    name: "Canard",
+    embedded: false
+  },
+  {
+    name: "Poisson",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({

@@ -2,16 +2,72 @@ type Query {
   info: String!
   feed: [Link!]!
   link(id: ID!): Link
+  plaine: Plaine!
+  mare(id: ID!): Mare
+  mares: [Mare!]!
+  canard(mareId: ID!): [Canard]
+  canards: [Canard]
+  poisson: [Poisson]
+  poissons(mareId: ID!): [Poisson]
+  
+  hasCanards(mareId: ID!): Boolean
+  hasPoissons(mareId: ID!): Boolean
+  isAffame(canardId: ID!): Boolean
+  isGros(poissonId: ID!): Boolean
+  isCanardvore(poissonId: ID!): Boolean
 }
 
 type Mutation {
   post(url: String!, description: String!): Link!
   updateLink(id: ID!, url: String, description: String): Link
   deleteLink(id: ID!): Link
+
+  createPlaine(): Plaine
+  createMare(plaineId: ID!): Mare
+  addCanard(mareID: ID!): Canard
+  addPoissons(mareID: ID!, quantite: Int!): [Poisson]
+  moveCanard(destinationMareID: ID!, canardID: ID!): Canard
+}
+
+type Subscriptions {
+  nouveauCanard(mareID: ID): Canard
 }
 
 type Link {
   id: ID!
   description: String!
   url: String!
+}
+
+type Plaine {
+  id: ID!
+  mares: [Mare]
+}
+
+type Mare {
+  id: ID!
+  nom: String
+  canards: [Canard]
+  poissons: [Poisson]
+}
+
+interface Animal {
+  id: ID!
+  nom: String
+  mare: Mare
+}
+
+type Canard implements Animal {
+  id: ID!
+  nom: String
+  mare: Mare
+  isAffame: Boolean
+}
+
+type Poisson implements Animal {
+  id: ID!
+  nom: String
+  mare: Mare
+  isGros: Boolean
+  isCanardvore: Boolean
 }

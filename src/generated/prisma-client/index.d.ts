@@ -16,7 +16,11 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  canard: (where?: CanardWhereInput) => Promise<boolean>;
   link: (where?: LinkWhereInput) => Promise<boolean>;
+  mare: (where?: MareWhereInput) => Promise<boolean>;
+  plaine: (where?: PlaineWhereInput) => Promise<boolean>;
+  poisson: (where?: PoissonWhereInput) => Promise<boolean>;
 }
 
 export interface Node {}
@@ -38,6 +42,25 @@ export interface Prisma {
    * Queries
    */
 
+  canard: (where: CanardWhereUniqueInput) => CanardNullablePromise;
+  canards: (args?: {
+    where?: CanardWhereInput;
+    orderBy?: CanardOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Canard>;
+  canardsConnection: (args?: {
+    where?: CanardWhereInput;
+    orderBy?: CanardOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => CanardConnectionPromise;
   link: (where: LinkWhereUniqueInput) => LinkNullablePromise;
   links: (args?: {
     where?: LinkWhereInput;
@@ -57,12 +80,85 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => LinkConnectionPromise;
+  mare: (where: MareWhereUniqueInput) => MareNullablePromise;
+  mares: (args?: {
+    where?: MareWhereInput;
+    orderBy?: MareOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Mare>;
+  maresConnection: (args?: {
+    where?: MareWhereInput;
+    orderBy?: MareOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => MareConnectionPromise;
+  plaine: (where: PlaineWhereUniqueInput) => PlaineNullablePromise;
+  plaines: (args?: {
+    where?: PlaineWhereInput;
+    orderBy?: PlaineOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Plaine>;
+  plainesConnection: (args?: {
+    where?: PlaineWhereInput;
+    orderBy?: PlaineOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => PlaineConnectionPromise;
+  poisson: (where: PoissonWhereUniqueInput) => PoissonNullablePromise;
+  poissons: (args?: {
+    where?: PoissonWhereInput;
+    orderBy?: PoissonOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Poisson>;
+  poissonsConnection: (args?: {
+    where?: PoissonWhereInput;
+    orderBy?: PoissonOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => PoissonConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
    * Mutations
    */
 
+  createCanard: (data: CanardCreateInput) => CanardPromise;
+  updateCanard: (args: {
+    data: CanardUpdateInput;
+    where: CanardWhereUniqueInput;
+  }) => CanardPromise;
+  updateManyCanards: (args: {
+    data: CanardUpdateManyMutationInput;
+    where?: CanardWhereInput;
+  }) => BatchPayloadPromise;
+  upsertCanard: (args: {
+    where: CanardWhereUniqueInput;
+    create: CanardCreateInput;
+    update: CanardUpdateInput;
+  }) => CanardPromise;
+  deleteCanard: (where: CanardWhereUniqueInput) => CanardPromise;
+  deleteManyCanards: (where?: CanardWhereInput) => BatchPayloadPromise;
   createLink: (data: LinkCreateInput) => LinkPromise;
   updateLink: (args: {
     data: LinkUpdateInput;
@@ -79,6 +175,50 @@ export interface Prisma {
   }) => LinkPromise;
   deleteLink: (where: LinkWhereUniqueInput) => LinkPromise;
   deleteManyLinks: (where?: LinkWhereInput) => BatchPayloadPromise;
+  createMare: (data: MareCreateInput) => MarePromise;
+  updateMare: (args: {
+    data: MareUpdateInput;
+    where: MareWhereUniqueInput;
+  }) => MarePromise;
+  updateManyMares: (args: {
+    data: MareUpdateManyMutationInput;
+    where?: MareWhereInput;
+  }) => BatchPayloadPromise;
+  upsertMare: (args: {
+    where: MareWhereUniqueInput;
+    create: MareCreateInput;
+    update: MareUpdateInput;
+  }) => MarePromise;
+  deleteMare: (where: MareWhereUniqueInput) => MarePromise;
+  deleteManyMares: (where?: MareWhereInput) => BatchPayloadPromise;
+  createPlaine: (data: PlaineCreateInput) => PlainePromise;
+  updatePlaine: (args: {
+    data: PlaineUpdateInput;
+    where: PlaineWhereUniqueInput;
+  }) => PlainePromise;
+  upsertPlaine: (args: {
+    where: PlaineWhereUniqueInput;
+    create: PlaineCreateInput;
+    update: PlaineUpdateInput;
+  }) => PlainePromise;
+  deletePlaine: (where: PlaineWhereUniqueInput) => PlainePromise;
+  deleteManyPlaines: (where?: PlaineWhereInput) => BatchPayloadPromise;
+  createPoisson: (data: PoissonCreateInput) => PoissonPromise;
+  updatePoisson: (args: {
+    data: PoissonUpdateInput;
+    where: PoissonWhereUniqueInput;
+  }) => PoissonPromise;
+  updateManyPoissons: (args: {
+    data: PoissonUpdateManyMutationInput;
+    where?: PoissonWhereInput;
+  }) => BatchPayloadPromise;
+  upsertPoisson: (args: {
+    where: PoissonWhereUniqueInput;
+    create: PoissonCreateInput;
+    update: PoissonUpdateInput;
+  }) => PoissonPromise;
+  deletePoisson: (where: PoissonWhereUniqueInput) => PoissonPromise;
+  deleteManyPoissons: (where?: PoissonWhereInput) => BatchPayloadPromise;
 
   /**
    * Subscriptions
@@ -88,9 +228,21 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  canard: (
+    where?: CanardSubscriptionWhereInput
+  ) => CanardSubscriptionPayloadSubscription;
   link: (
     where?: LinkSubscriptionWhereInput
   ) => LinkSubscriptionPayloadSubscription;
+  mare: (
+    where?: MareSubscriptionWhereInput
+  ) => MareSubscriptionPayloadSubscription;
+  plaine: (
+    where?: PlaineSubscriptionWhereInput
+  ) => PlaineSubscriptionPayloadSubscription;
+  poisson: (
+    where?: PoissonSubscriptionWhereInput
+  ) => PoissonSubscriptionPayloadSubscription;
 }
 
 export interface ClientConstructor<T> {
@@ -100,6 +252,16 @@ export interface ClientConstructor<T> {
 /**
  * Types
  */
+
+export type CanardOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "nom_ASC"
+  | "nom_DESC"
+  | "isAffame_ASC"
+  | "isAffame_DESC";
 
 export type LinkOrderByInput =
   | "id_ASC"
@@ -111,17 +273,133 @@ export type LinkOrderByInput =
   | "url_ASC"
   | "url_DESC";
 
+export type PoissonOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "nom_ASC"
+  | "nom_DESC"
+  | "isGros_ASC"
+  | "isGros_DESC"
+  | "isCanardvore_ASC"
+  | "isCanardvore_DESC";
+
+export type MareOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "nom_ASC"
+  | "nom_DESC";
+
+export type PlaineOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC";
+
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface LinkCreateInput {
-  id?: Maybe<ID_Input>;
-  description: String;
-  url: String;
-}
-
-export interface LinkUpdateInput {
+export interface LinkUpdateManyMutationInput {
   description?: Maybe<String>;
   url?: Maybe<String>;
+}
+
+export type CanardWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface MareUpdateManyMutationInput {
+  nom?: Maybe<String>;
+}
+
+export interface CanardUpdateManyWithWhereNestedInput {
+  where: CanardScalarWhereInput;
+  data: CanardUpdateManyDataInput;
+}
+
+export interface PoissonUpdateManyDataInput {
+  nom?: Maybe<String>;
+  isGros?: Maybe<Boolean>;
+  isCanardvore?: Maybe<Boolean>;
+}
+
+export interface PoissonCreateInput {
+  id?: Maybe<ID_Input>;
+  nom?: Maybe<String>;
+  isGros?: Maybe<Boolean>;
+  isCanardvore?: Maybe<Boolean>;
+}
+
+export type PoissonWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface PlaineSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<PlaineWhereInput>;
+  AND?: Maybe<PlaineSubscriptionWhereInput[] | PlaineSubscriptionWhereInput>;
+  OR?: Maybe<PlaineSubscriptionWhereInput[] | PlaineSubscriptionWhereInput>;
+  NOT?: Maybe<PlaineSubscriptionWhereInput[] | PlaineSubscriptionWhereInput>;
+}
+
+export interface PoissonUpdateManyWithWhereNestedInput {
+  where: PoissonScalarWhereInput;
+  data: PoissonUpdateManyDataInput;
+}
+
+export type LinkWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface PoissonScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  nom?: Maybe<String>;
+  nom_not?: Maybe<String>;
+  nom_in?: Maybe<String[] | String>;
+  nom_not_in?: Maybe<String[] | String>;
+  nom_lt?: Maybe<String>;
+  nom_lte?: Maybe<String>;
+  nom_gt?: Maybe<String>;
+  nom_gte?: Maybe<String>;
+  nom_contains?: Maybe<String>;
+  nom_not_contains?: Maybe<String>;
+  nom_starts_with?: Maybe<String>;
+  nom_not_starts_with?: Maybe<String>;
+  nom_ends_with?: Maybe<String>;
+  nom_not_ends_with?: Maybe<String>;
+  isGros?: Maybe<Boolean>;
+  isGros_not?: Maybe<Boolean>;
+  isCanardvore?: Maybe<Boolean>;
+  isCanardvore_not?: Maybe<Boolean>;
+  AND?: Maybe<PoissonScalarWhereInput[] | PoissonScalarWhereInput>;
+  OR?: Maybe<PoissonScalarWhereInput[] | PoissonScalarWhereInput>;
+  NOT?: Maybe<PoissonScalarWhereInput[] | PoissonScalarWhereInput>;
 }
 
 export interface LinkWhereInput {
@@ -180,9 +458,189 @@ export interface LinkWhereInput {
   NOT?: Maybe<LinkWhereInput[] | LinkWhereInput>;
 }
 
-export interface LinkUpdateManyMutationInput {
+export interface PoissonUpsertWithWhereUniqueNestedInput {
+  where: PoissonWhereUniqueInput;
+  update: PoissonUpdateDataInput;
+  create: PoissonCreateInput;
+}
+
+export interface CanardSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<CanardWhereInput>;
+  AND?: Maybe<CanardSubscriptionWhereInput[] | CanardSubscriptionWhereInput>;
+  OR?: Maybe<CanardSubscriptionWhereInput[] | CanardSubscriptionWhereInput>;
+  NOT?: Maybe<CanardSubscriptionWhereInput[] | CanardSubscriptionWhereInput>;
+}
+
+export interface PoissonUpdateInput {
+  nom?: Maybe<String>;
+  isGros?: Maybe<Boolean>;
+  isCanardvore?: Maybe<Boolean>;
+}
+
+export interface MareUpdateManyDataInput {
+  nom?: Maybe<String>;
+}
+
+export interface CanardCreateInput {
+  id?: Maybe<ID_Input>;
+  nom?: Maybe<String>;
+  isAffame?: Maybe<Boolean>;
+}
+
+export interface MareUpdateManyWithWhereNestedInput {
+  where: MareScalarWhereInput;
+  data: MareUpdateManyDataInput;
+}
+
+export interface CanardUpdateInput {
+  nom?: Maybe<String>;
+  isAffame?: Maybe<Boolean>;
+}
+
+export interface MareWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  nom?: Maybe<String>;
+  nom_not?: Maybe<String>;
+  nom_in?: Maybe<String[] | String>;
+  nom_not_in?: Maybe<String[] | String>;
+  nom_lt?: Maybe<String>;
+  nom_lte?: Maybe<String>;
+  nom_gt?: Maybe<String>;
+  nom_gte?: Maybe<String>;
+  nom_contains?: Maybe<String>;
+  nom_not_contains?: Maybe<String>;
+  nom_starts_with?: Maybe<String>;
+  nom_not_starts_with?: Maybe<String>;
+  nom_ends_with?: Maybe<String>;
+  nom_not_ends_with?: Maybe<String>;
+  canards_every?: Maybe<CanardWhereInput>;
+  canards_some?: Maybe<CanardWhereInput>;
+  canards_none?: Maybe<CanardWhereInput>;
+  poissons_every?: Maybe<PoissonWhereInput>;
+  poissons_some?: Maybe<PoissonWhereInput>;
+  poissons_none?: Maybe<PoissonWhereInput>;
+  AND?: Maybe<MareWhereInput[] | MareWhereInput>;
+  OR?: Maybe<MareWhereInput[] | MareWhereInput>;
+  NOT?: Maybe<MareWhereInput[] | MareWhereInput>;
+}
+
+export interface CanardUpdateManyMutationInput {
+  nom?: Maybe<String>;
+  isAffame?: Maybe<Boolean>;
+}
+
+export interface MareUpdateDataInput {
+  nom?: Maybe<String>;
+  canards?: Maybe<CanardUpdateManyInput>;
+  poissons?: Maybe<PoissonUpdateManyInput>;
+}
+
+export interface PoissonUpdateDataInput {
+  nom?: Maybe<String>;
+  isGros?: Maybe<Boolean>;
+  isCanardvore?: Maybe<Boolean>;
+}
+
+export interface MareUpdateManyInput {
+  create?: Maybe<MareCreateInput[] | MareCreateInput>;
+  update?: Maybe<
+    | MareUpdateWithWhereUniqueNestedInput[]
+    | MareUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | MareUpsertWithWhereUniqueNestedInput[]
+    | MareUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<MareWhereUniqueInput[] | MareWhereUniqueInput>;
+  connect?: Maybe<MareWhereUniqueInput[] | MareWhereUniqueInput>;
+  set?: Maybe<MareWhereUniqueInput[] | MareWhereUniqueInput>;
+  disconnect?: Maybe<MareWhereUniqueInput[] | MareWhereUniqueInput>;
+  deleteMany?: Maybe<MareScalarWhereInput[] | MareScalarWhereInput>;
+  updateMany?: Maybe<
+    MareUpdateManyWithWhereNestedInput[] | MareUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface PoissonUpdateWithWhereUniqueNestedInput {
+  where: PoissonWhereUniqueInput;
+  data: PoissonUpdateDataInput;
+}
+
+export interface PlaineUpdateInput {
+  mares?: Maybe<MareUpdateManyInput>;
+}
+
+export interface LinkCreateInput {
+  id?: Maybe<ID_Input>;
+  description: String;
+  url: String;
+}
+
+export interface MareCreateManyInput {
+  create?: Maybe<MareCreateInput[] | MareCreateInput>;
+  connect?: Maybe<MareWhereUniqueInput[] | MareWhereUniqueInput>;
+}
+
+export interface LinkUpdateInput {
   description?: Maybe<String>;
   url?: Maybe<String>;
+}
+
+export interface PoissonSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<PoissonWhereInput>;
+  AND?: Maybe<PoissonSubscriptionWhereInput[] | PoissonSubscriptionWhereInput>;
+  OR?: Maybe<PoissonSubscriptionWhereInput[] | PoissonSubscriptionWhereInput>;
+  NOT?: Maybe<PoissonSubscriptionWhereInput[] | PoissonSubscriptionWhereInput>;
+}
+
+export interface PoissonUpdateManyInput {
+  create?: Maybe<PoissonCreateInput[] | PoissonCreateInput>;
+  update?: Maybe<
+    | PoissonUpdateWithWhereUniqueNestedInput[]
+    | PoissonUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | PoissonUpsertWithWhereUniqueNestedInput[]
+    | PoissonUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<PoissonWhereUniqueInput[] | PoissonWhereUniqueInput>;
+  connect?: Maybe<PoissonWhereUniqueInput[] | PoissonWhereUniqueInput>;
+  set?: Maybe<PoissonWhereUniqueInput[] | PoissonWhereUniqueInput>;
+  disconnect?: Maybe<PoissonWhereUniqueInput[] | PoissonWhereUniqueInput>;
+  deleteMany?: Maybe<PoissonScalarWhereInput[] | PoissonScalarWhereInput>;
+  updateMany?: Maybe<
+    | PoissonUpdateManyWithWhereNestedInput[]
+    | PoissonUpdateManyWithWhereNestedInput
+  >;
 }
 
 export interface LinkSubscriptionWhereInput {
@@ -196,12 +654,562 @@ export interface LinkSubscriptionWhereInput {
   NOT?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
 }
 
-export type LinkWhereUniqueInput = AtLeastOne<{
+export interface MareCreateInput {
+  id?: Maybe<ID_Input>;
+  nom?: Maybe<String>;
+  canards?: Maybe<CanardCreateManyInput>;
+  poissons?: Maybe<PoissonCreateManyInput>;
+}
+
+export interface PoissonUpdateManyMutationInput {
+  nom?: Maybe<String>;
+  isGros?: Maybe<Boolean>;
+  isCanardvore?: Maybe<Boolean>;
+}
+
+export interface CanardCreateManyInput {
+  create?: Maybe<CanardCreateInput[] | CanardCreateInput>;
+  connect?: Maybe<CanardWhereUniqueInput[] | CanardWhereUniqueInput>;
+}
+
+export interface PoissonWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  nom?: Maybe<String>;
+  nom_not?: Maybe<String>;
+  nom_in?: Maybe<String[] | String>;
+  nom_not_in?: Maybe<String[] | String>;
+  nom_lt?: Maybe<String>;
+  nom_lte?: Maybe<String>;
+  nom_gt?: Maybe<String>;
+  nom_gte?: Maybe<String>;
+  nom_contains?: Maybe<String>;
+  nom_not_contains?: Maybe<String>;
+  nom_starts_with?: Maybe<String>;
+  nom_not_starts_with?: Maybe<String>;
+  nom_ends_with?: Maybe<String>;
+  nom_not_ends_with?: Maybe<String>;
+  isGros?: Maybe<Boolean>;
+  isGros_not?: Maybe<Boolean>;
+  isCanardvore?: Maybe<Boolean>;
+  isCanardvore_not?: Maybe<Boolean>;
+  AND?: Maybe<PoissonWhereInput[] | PoissonWhereInput>;
+  OR?: Maybe<PoissonWhereInput[] | PoissonWhereInput>;
+  NOT?: Maybe<PoissonWhereInput[] | PoissonWhereInput>;
+}
+
+export interface PoissonCreateManyInput {
+  create?: Maybe<PoissonCreateInput[] | PoissonCreateInput>;
+  connect?: Maybe<PoissonWhereUniqueInput[] | PoissonWhereUniqueInput>;
+}
+
+export interface MareUpsertWithWhereUniqueNestedInput {
+  where: MareWhereUniqueInput;
+  update: MareUpdateDataInput;
+  create: MareCreateInput;
+}
+
+export interface CanardUpdateManyDataInput {
+  nom?: Maybe<String>;
+  isAffame?: Maybe<Boolean>;
+}
+
+export type PlaineWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
+export interface MareUpdateInput {
+  nom?: Maybe<String>;
+  canards?: Maybe<CanardUpdateManyInput>;
+  poissons?: Maybe<PoissonUpdateManyInput>;
+}
+
+export interface PlaineCreateInput {
+  id?: Maybe<ID_Input>;
+  mares?: Maybe<MareCreateManyInput>;
+}
+
+export interface CanardUpdateManyInput {
+  create?: Maybe<CanardCreateInput[] | CanardCreateInput>;
+  update?: Maybe<
+    | CanardUpdateWithWhereUniqueNestedInput[]
+    | CanardUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | CanardUpsertWithWhereUniqueNestedInput[]
+    | CanardUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<CanardWhereUniqueInput[] | CanardWhereUniqueInput>;
+  connect?: Maybe<CanardWhereUniqueInput[] | CanardWhereUniqueInput>;
+  set?: Maybe<CanardWhereUniqueInput[] | CanardWhereUniqueInput>;
+  disconnect?: Maybe<CanardWhereUniqueInput[] | CanardWhereUniqueInput>;
+  deleteMany?: Maybe<CanardScalarWhereInput[] | CanardScalarWhereInput>;
+  updateMany?: Maybe<
+    | CanardUpdateManyWithWhereNestedInput[]
+    | CanardUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface CanardWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  nom?: Maybe<String>;
+  nom_not?: Maybe<String>;
+  nom_in?: Maybe<String[] | String>;
+  nom_not_in?: Maybe<String[] | String>;
+  nom_lt?: Maybe<String>;
+  nom_lte?: Maybe<String>;
+  nom_gt?: Maybe<String>;
+  nom_gte?: Maybe<String>;
+  nom_contains?: Maybe<String>;
+  nom_not_contains?: Maybe<String>;
+  nom_starts_with?: Maybe<String>;
+  nom_not_starts_with?: Maybe<String>;
+  nom_ends_with?: Maybe<String>;
+  nom_not_ends_with?: Maybe<String>;
+  isAffame?: Maybe<Boolean>;
+  isAffame_not?: Maybe<Boolean>;
+  AND?: Maybe<CanardWhereInput[] | CanardWhereInput>;
+  OR?: Maybe<CanardWhereInput[] | CanardWhereInput>;
+  NOT?: Maybe<CanardWhereInput[] | CanardWhereInput>;
+}
+
+export interface CanardScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  nom?: Maybe<String>;
+  nom_not?: Maybe<String>;
+  nom_in?: Maybe<String[] | String>;
+  nom_not_in?: Maybe<String[] | String>;
+  nom_lt?: Maybe<String>;
+  nom_lte?: Maybe<String>;
+  nom_gt?: Maybe<String>;
+  nom_gte?: Maybe<String>;
+  nom_contains?: Maybe<String>;
+  nom_not_contains?: Maybe<String>;
+  nom_starts_with?: Maybe<String>;
+  nom_not_starts_with?: Maybe<String>;
+  nom_ends_with?: Maybe<String>;
+  nom_not_ends_with?: Maybe<String>;
+  isAffame?: Maybe<Boolean>;
+  isAffame_not?: Maybe<Boolean>;
+  AND?: Maybe<CanardScalarWhereInput[] | CanardScalarWhereInput>;
+  OR?: Maybe<CanardScalarWhereInput[] | CanardScalarWhereInput>;
+  NOT?: Maybe<CanardScalarWhereInput[] | CanardScalarWhereInput>;
+}
+
+export interface CanardUpsertWithWhereUniqueNestedInput {
+  where: CanardWhereUniqueInput;
+  update: CanardUpdateDataInput;
+  create: CanardCreateInput;
+}
+
+export interface CanardUpdateDataInput {
+  nom?: Maybe<String>;
+  isAffame?: Maybe<Boolean>;
+}
+
+export interface CanardUpdateWithWhereUniqueNestedInput {
+  where: CanardWhereUniqueInput;
+  data: CanardUpdateDataInput;
+}
+
+export type MareWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface MareSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<MareWhereInput>;
+  AND?: Maybe<MareSubscriptionWhereInput[] | MareSubscriptionWhereInput>;
+  OR?: Maybe<MareSubscriptionWhereInput[] | MareSubscriptionWhereInput>;
+  NOT?: Maybe<MareSubscriptionWhereInput[] | MareSubscriptionWhereInput>;
+}
+
+export interface PlaineWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  mares_every?: Maybe<MareWhereInput>;
+  mares_some?: Maybe<MareWhereInput>;
+  mares_none?: Maybe<MareWhereInput>;
+  AND?: Maybe<PlaineWhereInput[] | PlaineWhereInput>;
+  OR?: Maybe<PlaineWhereInput[] | PlaineWhereInput>;
+  NOT?: Maybe<PlaineWhereInput[] | PlaineWhereInput>;
+}
+
+export interface MareUpdateWithWhereUniqueNestedInput {
+  where: MareWhereUniqueInput;
+  data: MareUpdateDataInput;
+}
+
+export interface MareScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  nom?: Maybe<String>;
+  nom_not?: Maybe<String>;
+  nom_in?: Maybe<String[] | String>;
+  nom_not_in?: Maybe<String[] | String>;
+  nom_lt?: Maybe<String>;
+  nom_lte?: Maybe<String>;
+  nom_gt?: Maybe<String>;
+  nom_gte?: Maybe<String>;
+  nom_contains?: Maybe<String>;
+  nom_not_contains?: Maybe<String>;
+  nom_starts_with?: Maybe<String>;
+  nom_not_starts_with?: Maybe<String>;
+  nom_ends_with?: Maybe<String>;
+  nom_not_ends_with?: Maybe<String>;
+  AND?: Maybe<MareScalarWhereInput[] | MareScalarWhereInput>;
+  OR?: Maybe<MareScalarWhereInput[] | MareScalarWhereInput>;
+  NOT?: Maybe<MareScalarWhereInput[] | MareScalarWhereInput>;
+}
+
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface PoissonPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  nom?: String;
+  isGros?: Boolean;
+  isCanardvore?: Boolean;
+}
+
+export interface PoissonPreviousValuesPromise
+  extends Promise<PoissonPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  nom: () => Promise<String>;
+  isGros: () => Promise<Boolean>;
+  isCanardvore: () => Promise<Boolean>;
+}
+
+export interface PoissonPreviousValuesSubscription
+  extends Promise<AsyncIterator<PoissonPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  nom: () => Promise<AsyncIterator<String>>;
+  isGros: () => Promise<AsyncIterator<Boolean>>;
+  isCanardvore: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface Mare {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  nom?: String;
+}
+
+export interface MarePromise extends Promise<Mare>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  nom: () => Promise<String>;
+  canards: <T = FragmentableArray<Canard>>(args?: {
+    where?: CanardWhereInput;
+    orderBy?: CanardOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  poissons: <T = FragmentableArray<Poisson>>(args?: {
+    where?: PoissonWhereInput;
+    orderBy?: PoissonOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface MareSubscription
+  extends Promise<AsyncIterator<Mare>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  nom: () => Promise<AsyncIterator<String>>;
+  canards: <T = Promise<AsyncIterator<CanardSubscription>>>(args?: {
+    where?: CanardWhereInput;
+    orderBy?: CanardOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  poissons: <T = Promise<AsyncIterator<PoissonSubscription>>>(args?: {
+    where?: PoissonWhereInput;
+    orderBy?: PoissonOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface MareNullablePromise
+  extends Promise<Mare | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  nom: () => Promise<String>;
+  canards: <T = FragmentableArray<Canard>>(args?: {
+    where?: CanardWhereInput;
+    orderBy?: CanardOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  poissons: <T = FragmentableArray<Poisson>>(args?: {
+    where?: PoissonWhereInput;
+    orderBy?: PoissonOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface CanardConnection {
+  pageInfo: PageInfo;
+  edges: CanardEdge[];
+}
+
+export interface CanardConnectionPromise
+  extends Promise<CanardConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CanardEdge>>() => T;
+  aggregate: <T = AggregateCanardPromise>() => T;
+}
+
+export interface CanardConnectionSubscription
+  extends Promise<AsyncIterator<CanardConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CanardEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCanardSubscription>() => T;
+}
+
+export interface PlainePreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+}
+
+export interface PlainePreviousValuesPromise
+  extends Promise<PlainePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+}
+
+export interface PlainePreviousValuesSubscription
+  extends Promise<AsyncIterator<PlainePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface CanardEdge {
+  node: Canard;
+  cursor: String;
+}
+
+export interface CanardEdgePromise extends Promise<CanardEdge>, Fragmentable {
+  node: <T = CanardPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface CanardEdgeSubscription
+  extends Promise<AsyncIterator<CanardEdge>>,
+    Fragmentable {
+  node: <T = CanardSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PlaineSubscriptionPayload {
+  mutation: MutationType;
+  node: Plaine;
+  updatedFields: String[];
+  previousValues: PlainePreviousValues;
+}
+
+export interface PlaineSubscriptionPayloadPromise
+  extends Promise<PlaineSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PlainePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PlainePreviousValuesPromise>() => T;
+}
+
+export interface PlaineSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PlaineSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PlaineSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PlainePreviousValuesSubscription>() => T;
+}
+
+export interface AggregateLink {
+  count: Int;
+}
+
+export interface AggregateLinkPromise
+  extends Promise<AggregateLink>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateLinkSubscription
+  extends Promise<AsyncIterator<AggregateLink>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface PoissonEdge {
+  node: Poisson;
+  cursor: String;
+}
+
+export interface PoissonEdgePromise extends Promise<PoissonEdge>, Fragmentable {
+  node: <T = PoissonPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PoissonEdgeSubscription
+  extends Promise<AsyncIterator<PoissonEdge>>,
+    Fragmentable {
+  node: <T = PoissonSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface LinkEdge {
@@ -221,20 +1229,235 @@ export interface LinkEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface BatchPayload {
-  count: Long;
+export interface AggregatePlaine {
+  count: Int;
 }
 
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
+export interface AggregatePlainePromise
+  extends Promise<AggregatePlaine>,
     Fragmentable {
-  count: () => Promise<Long>;
+  count: () => Promise<Int>;
 }
 
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
+export interface AggregatePlaineSubscription
+  extends Promise<AsyncIterator<AggregatePlaine>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface LinkConnection {
+  pageInfo: PageInfo;
+  edges: LinkEdge[];
+}
+
+export interface LinkConnectionPromise
+  extends Promise<LinkConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<LinkEdge>>() => T;
+  aggregate: <T = AggregateLinkPromise>() => T;
+}
+
+export interface LinkConnectionSubscription
+  extends Promise<AsyncIterator<LinkConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<LinkEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateLinkSubscription>() => T;
+}
+
+export interface PlaineConnection {
+  pageInfo: PageInfo;
+  edges: PlaineEdge[];
+}
+
+export interface PlaineConnectionPromise
+  extends Promise<PlaineConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PlaineEdge>>() => T;
+  aggregate: <T = AggregatePlainePromise>() => T;
+}
+
+export interface PlaineConnectionSubscription
+  extends Promise<AsyncIterator<PlaineConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PlaineEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePlaineSubscription>() => T;
+}
+
+export interface Canard {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  nom?: String;
+  isAffame?: Boolean;
+}
+
+export interface CanardPromise extends Promise<Canard>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  nom: () => Promise<String>;
+  isAffame: () => Promise<Boolean>;
+}
+
+export interface CanardSubscription
+  extends Promise<AsyncIterator<Canard>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  nom: () => Promise<AsyncIterator<String>>;
+  isAffame: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface CanardNullablePromise
+  extends Promise<Canard | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  nom: () => Promise<String>;
+  isAffame: () => Promise<Boolean>;
+}
+
+export interface Plaine {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+}
+
+export interface PlainePromise extends Promise<Plaine>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  mares: <T = FragmentableArray<Mare>>(args?: {
+    where?: MareWhereInput;
+    orderBy?: MareOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface PlaineSubscription
+  extends Promise<AsyncIterator<Plaine>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  mares: <T = Promise<AsyncIterator<MareSubscription>>>(args?: {
+    where?: MareWhereInput;
+    orderBy?: MareOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface PlaineNullablePromise
+  extends Promise<Plaine | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  mares: <T = FragmentableArray<Mare>>(args?: {
+    where?: MareWhereInput;
+    orderBy?: MareOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface CanardSubscriptionPayload {
+  mutation: MutationType;
+  node: Canard;
+  updatedFields: String[];
+  previousValues: CanardPreviousValues;
+}
+
+export interface CanardSubscriptionPayloadPromise
+  extends Promise<CanardSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = CanardPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = CanardPreviousValuesPromise>() => T;
+}
+
+export interface CanardSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<CanardSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = CanardSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = CanardPreviousValuesSubscription>() => T;
+}
+
+export interface MareEdge {
+  node: Mare;
+  cursor: String;
+}
+
+export interface MareEdgePromise extends Promise<MareEdge>, Fragmentable {
+  node: <T = MarePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MareEdgeSubscription
+  extends Promise<AsyncIterator<MareEdge>>,
+    Fragmentable {
+  node: <T = MareSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface CanardPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  nom?: String;
+  isAffame?: Boolean;
+}
+
+export interface CanardPreviousValuesPromise
+  extends Promise<CanardPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  nom: () => Promise<String>;
+  isAffame: () => Promise<Boolean>;
+}
+
+export interface CanardPreviousValuesSubscription
+  extends Promise<AsyncIterator<CanardPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  nom: () => Promise<AsyncIterator<String>>;
+  isAffame: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface Link {
@@ -269,6 +1492,22 @@ export interface LinkNullablePromise
   url: () => Promise<String>;
 }
 
+export interface AggregatePoisson {
+  count: Int;
+}
+
+export interface AggregatePoissonPromise
+  extends Promise<AggregatePoisson>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePoissonSubscription
+  extends Promise<AsyncIterator<AggregatePoisson>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface LinkSubscriptionPayload {
   mutation: MutationType;
   node: Link;
@@ -294,62 +1533,98 @@ export interface LinkSubscriptionPayloadSubscription
   previousValues: <T = LinkPreviousValuesSubscription>() => T;
 }
 
-export interface LinkConnection {
-  pageInfo: PageInfo;
-  edges: LinkEdge[];
+export interface PlaineEdge {
+  node: Plaine;
+  cursor: String;
 }
 
-export interface LinkConnectionPromise
-  extends Promise<LinkConnection>,
+export interface PlaineEdgePromise extends Promise<PlaineEdge>, Fragmentable {
+  node: <T = PlainePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PlaineEdgeSubscription
+  extends Promise<AsyncIterator<PlaineEdge>>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<LinkEdge>>() => T;
-  aggregate: <T = AggregateLinkPromise>() => T;
+  node: <T = PlaineSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface LinkConnectionSubscription
-  extends Promise<AsyncIterator<LinkConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<LinkEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateLinkSubscription>() => T;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateLink {
+export interface AggregateMare {
   count: Int;
 }
 
-export interface AggregateLinkPromise
-  extends Promise<AggregateLink>,
+export interface AggregateMarePromise
+  extends Promise<AggregateMare>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateLinkSubscription
-  extends Promise<AsyncIterator<AggregateLink>>,
+export interface AggregateMareSubscription
+  extends Promise<AsyncIterator<AggregateMare>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface MarePreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  nom?: String;
+}
+
+export interface MarePreviousValuesPromise
+  extends Promise<MarePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  nom: () => Promise<String>;
+}
+
+export interface MarePreviousValuesSubscription
+  extends Promise<AsyncIterator<MarePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  nom: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MareSubscriptionPayload {
+  mutation: MutationType;
+  node: Mare;
+  updatedFields: String[];
+  previousValues: MarePreviousValues;
+}
+
+export interface MareSubscriptionPayloadPromise
+  extends Promise<MareSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MarePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MarePreviousValuesPromise>() => T;
+}
+
+export interface MareSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MareSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MareSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MarePreviousValuesSubscription>() => T;
+}
+
+export interface AggregateCanard {
+  count: Int;
+}
+
+export interface AggregateCanardPromise
+  extends Promise<AggregateCanard>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateCanardSubscription
+  extends Promise<AsyncIterator<AggregateCanard>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -379,26 +1654,115 @@ export interface LinkPreviousValuesSubscription
   url: () => Promise<AsyncIterator<String>>;
 }
 
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
+export interface MareConnection {
+  pageInfo: PageInfo;
+  edges: MareEdge[];
+}
 
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
+export interface MareConnectionPromise
+  extends Promise<MareConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MareEdge>>() => T;
+  aggregate: <T = AggregateMarePromise>() => T;
+}
+
+export interface MareConnectionSubscription
+  extends Promise<AsyncIterator<MareConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MareEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMareSubscription>() => T;
+}
+
+export interface PoissonSubscriptionPayload {
+  mutation: MutationType;
+  node: Poisson;
+  updatedFields: String[];
+  previousValues: PoissonPreviousValues;
+}
+
+export interface PoissonSubscriptionPayloadPromise
+  extends Promise<PoissonSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PoissonPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PoissonPreviousValuesPromise>() => T;
+}
+
+export interface PoissonSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PoissonSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PoissonSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PoissonPreviousValuesSubscription>() => T;
+}
+
+export interface PoissonConnection {
+  pageInfo: PageInfo;
+  edges: PoissonEdge[];
+}
+
+export interface PoissonConnectionPromise
+  extends Promise<PoissonConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PoissonEdge>>() => T;
+  aggregate: <T = AggregatePoissonPromise>() => T;
+}
+
+export interface PoissonConnectionSubscription
+  extends Promise<AsyncIterator<PoissonConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PoissonEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePoissonSubscription>() => T;
+}
+
+export interface Poisson {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  nom?: String;
+  isGros?: Boolean;
+  isCanardvore?: Boolean;
+}
+
+export interface PoissonPromise extends Promise<Poisson>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  nom: () => Promise<String>;
+  isGros: () => Promise<Boolean>;
+  isCanardvore: () => Promise<Boolean>;
+}
+
+export interface PoissonSubscription
+  extends Promise<AsyncIterator<Poisson>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  nom: () => Promise<AsyncIterator<String>>;
+  isGros: () => Promise<AsyncIterator<Boolean>>;
+  isCanardvore: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface PoissonNullablePromise
+  extends Promise<Poisson | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  nom: () => Promise<String>;
+  isGros: () => Promise<Boolean>;
+  isCanardvore: () => Promise<Boolean>;
+}
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
 
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
+export type Long = string;
 
 /*
 DateTime scalar input type, allowing Date
@@ -410,7 +1774,21 @@ DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
 
-export type Long = string;
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
 
 /**
  * Model Metadata
@@ -419,6 +1797,22 @@ export type Long = string;
 export const models: Model[] = [
   {
     name: "Link",
+    embedded: false
+  },
+  {
+    name: "Plaine",
+    embedded: false
+  },
+  {
+    name: "Mare",
+    embedded: false
+  },
+  {
+    name: "Canard",
+    embedded: false
+  },
+  {
+    name: "Poisson",
     embedded: false
   }
 ];
