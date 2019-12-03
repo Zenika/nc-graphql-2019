@@ -1,0 +1,12 @@
+{
+  "name": "nc-graphql-2019",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Zenika/nc-graphql-2019.git",
+  "author": "Alexis Brones <alexis.brones@zenika.com>",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-yoga": "^1.18.3",
+    "prisma-client-lib": "^1.34.10"
+  }
+}
