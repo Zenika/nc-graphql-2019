@@ -28,5 +28,17 @@ module.exports = {
       }))
     }
     return poissonsCreated;
+  },
+  moveCanard: (root, args, context) => {
+    return context.prisma.updateCanard({
+      data: {
+        mare: {
+          connect: { id: args.destinationMareId }
+        }
+      },
+      where: {
+        id: args.canardId
+      }
+    })
   }
 }
