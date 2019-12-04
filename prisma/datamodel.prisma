@@ -1,7 +1,7 @@
 type Plaine {
   id: ID! @id
   createdAt: DateTime! @createdAt
-  mares: [Mare!]!
+  mares: [Mare!]
 }
 
 type Mare {
@@ -9,8 +9,8 @@ type Mare {
   createdAt: DateTime! @createdAt
   nom: String
   plaine: Plaine!
-  canards: [Canard!]!
-  poissons: [Poisson!]!
+  canards: [Canard!]
+  poissons: [Poisson!]
 }
 
 type Canard {
