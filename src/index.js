@@ -16,16 +16,19 @@ const resolvers = {
       return context.prisma.plaine({id: args.plaineId}).mares()
     },
     canard: (root, args, context, info) => {
-      return context.prisma.mare({id: root.mareid}).canard({id: args.id})
+      return context.prisma.mare({id: args.mareid}).canard({id: args.id})
     },
     canards: (root, args, context, info) => {
+      return context.prisma.mare({id: args.mareid}).canards()
+    },
+    allCanards: (root, args, context, info) => {
       return context.prisma.canards()
     },
-    poisson: (root, args, context, info) => {
-      return context.prisma.mare({id: root.id}).poisson({id: args.id})
+    allPoissons: (root, args, context, info) => {
+      return context.prisma.poissons()
     },
     poissons: (root, args, context, info) => {
-      return context.prisma.mare({id: root.mareId}).poissons()
+      return context.prisma.mare({id: args.mareId}).poissons()
     }
   },
   Mutation: {
@@ -47,6 +50,58 @@ const resolvers = {
           connect: { id: args.mareId }
         }
       })
+    },
+    addPoissons: (root, args, context) => {
+      const poissonsCreated = []
+      for (let i=1; i<= args.quantite; i++ ) {
+        poissonsCreated.push(context.prisma.createPoisson({
+          mare: {
+            connect: { id: args.mareId }
+          }
+        }))
+      }
+      return poissonsCreated;
+      
+    }
+  },
+  Subscription: {
+    nouveauCanard: {
+      subscribe: (root, args, context) => {
+        return context.prisma.$subscribe
+          .canard({
+            mutation_in: ["CREATED"],
+            node: {
+              id: args.mareId
+            }
+          })
+          .node();
+      },
+      resolve: payload => {
+        return payload;
+      }
+    }
+  },
+  Plaine: {
+    mares: (root, args, context) => {
+      return context.prisma.plaine({id: root.id}).mares()
+    }
+  },
+  Mare: {
+    poissons: (root, args, context) => {
+      return context.prisma.mare({id: root.id}).poissons()
+    },
+    canards: (root, args, context) => {
+      return context.prisma.mare({id: root.id}).canards()
+    }
+  },
+  Canard: {
+    mare: (root, args, context) => {
+      return context.prisma.canard({id: root.id}).mare()
+    }
+  },
+  Poisson: {
+    mare: (root, args, context) => {
+      return context.prisma.poisson({id: root.id}).mare()
     }
   }
 }

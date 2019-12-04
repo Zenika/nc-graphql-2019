@@ -1,22 +1,16 @@
 type Query {
-  info: String!
-  feed: [Link!]!
-  link(id: ID!): Link
   plaine(id: ID!): Plaine
-  plaines: [Plaine!]!
+  plaines: [Plaine!]
   mare(id: ID!): Mare
-  mares(plaineId: ID!): [Mare!]!
-  canard(mareId: ID!): [Canard]
-  canards: [Canard]
-  poisson: [Poisson]
+  mares(plaineId: ID!): [Mare!]
+  canard(mareId: ID!, id: ID!): Canard
+  canards(mareId: ID!): [Canard]
+  allCanards: [Canard]
+  allPoissons: [Poisson]
   poissons(mareId: ID!): [Poisson]
 }
 
 type Mutation {
-  post(url: String!, description: String!): Link!
-  updateLink(id: ID!, url: String, description: String): Link
-  deleteLink(id: ID!): Link
-
   createPlaine: Plaine
   createMare(plaineId: ID!, nom: String): Mare
   addCanard(mareId: ID!, nom: String): Canard
@@ -25,21 +19,21 @@ type Mutation {
   moveCanard(destinationMareId: ID!, canardId: ID!): Canard
 }
 
-type Subscriptions {
+type Subscription {
   nouveauCanard(mareID: ID): Canard
 }
 
 type Plaine {
   id: ID!
-  mares: [Mare!]!
+  mares: [Mare!]
 }
 
 type Mare {
   id: ID!
   nom: String
   plaine: Plaine!
-  canards: [Canard!]!
-  poissons: [Poisson!]!
+  canards: [Canard!]
+  poissons: [Poisson!]
 }
 
 type Canard {
