@@ -8,6 +8,8 @@ type Query {
   allCanards: [Canard]
   allPoissons: [Poisson]
   poissons(mareId: ID!): [Poisson]
+  apiRestGeo: [Geo]
+  apiFatecFournisseur: Fournisseurs
 }
 
 type Mutation {
@@ -48,4 +50,95 @@ type Poisson {
   mare: Mare!
   isGros: Boolean
   isCanarovore: Boolean
+}
+
+type Geo {
+  nom: String
+  code: String
+  codeRegion: String
+  region: Region
+}
+
+type Region {
+  nom: String
+  code: String
+}
+
+type Fournisseurs {
+  fournisseurs: [Fournisseur]
+  pageTotal: String
+  itemTotal: String
+  pageSelectionnee: String
+}
+
+type Fournisseur {
+  id: String!
+  codeFournisseurAs: String
+  reseau: Reseau
+  nomCommercialUsuel: String
+  adresse: Adresse
+  dateEntreeIdentification: String
+  dateEntreeReferencement: String
+  dateCloture: String
+  raisonSocialeFournisseurReseau: String
+  nomCommercialeFournisseurReseau: String
+  contactsFournisseur: [Contact]
+  siren: String
+  nic: String
+  cycl: Boolean
+  vl: Boolean
+  pl: Boolean
+  eqpt: Boolean
+  engins: Boolean
+  categoriesMateriel: [String]
+  prestationCarrosserie: Boolean
+  prestationPneumatique: Boolean
+  prestationVitrage: Boolean
+  prestationControleTechnique: Boolean
+  prestationConvoyage: Boolean
+  serviceDepannage: Boolean
+  serviceRemorquage: Boolean
+  serviceADomicile: Boolean
+  serviceLocationVEH: Boolean
+  serviceCarburant: Boolean
+  serviceLavage: Boolean
+  fournisseurDateCreation: String
+  fournisseurDateMaj: String
+  nombreAccords: String
+  agreeRev: Boolean
+  agreeRep: Boolean
+  adherentProtocoleReseau: Boolean
+  protocolePremium: Boolean
+  latitude: String
+  longitude: String
+}
+
+type Reseau {
+  id: String!
+  nomReseau: String
+  natureReseau: String
+  maintenanceReparation: Boolean
+  vehiculeRelais: Boolean
+  assistance: Boolean
+  conciergerie: Boolean
+  protocoleReseau: Boolean
+}
+
+type Adresse {
+  id: String!
+  adresse1: String
+  adresse2: String
+  adresse3: String
+  codePostal: String
+  ville: String
+  boitePostale: String
+  pays: String
+}
+
+type Contact {
+  id: String!
+  service: String
+  telephone1: String
+  fax: String
+  email: String
 }
