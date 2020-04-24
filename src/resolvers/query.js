@@ -1,29 +1,26 @@
 module.exports = {
   plaine: (root, args, context, info) => {
-    return context.prisma.plaine({id: args.id})
+    return context.prisma.plaine.findOne({ where: { id: args.id } });
   },
   plaines: (root, args, context, info) => {
-    return context.prisma.plaines()
+    return context.prisma.plaine.findMany();
   },
   mare: (root, args, context, info) => {
-    return context.prisma.mare({id: args.id})
+    return context.prisma.mare.findOne({ where: { id: args.id } });
   },
   mares: (root, args, context, info) => {
-    return context.prisma.plaine({id: args.plaineId}).mares()
+    return context.prisma.mare.findMany();
   },
   canard: (root, args, context, info) => {
-    return context.prisma.mare({id: args.mareid}).canard({id: args.id})
+    return context.prisma.canard.findOne({ where: { id: args.id } });
   },
   canards: (root, args, context, info) => {
-    return context.prisma.mare({id: args.mareid}).canards()
+    return context.prisma.canard.findMany();
   },
-  allCanards: (root, args, context, info) => {
-    return context.prisma.canards()
-  },
-  allPoissons: (root, args, context, info) => {
-    return context.prisma.poissons()
+  poisson: (root, args, context, info) => {
+    return context.prisma.poisson.findOne({ where: { id: args.id } });
   },
   poissons: (root, args, context, info) => {
-    return context.prisma.mare({id: args.mareId}).poissons()
-  }
-}
+    return context.prisma.poisson.findMany();
+  },
+};

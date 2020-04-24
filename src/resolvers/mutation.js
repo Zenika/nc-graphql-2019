@@ -1,44 +1,52 @@
 module.exports = {
   createPlaine: (root, args, context) => {
-    return context.prisma.createPlaine({})
+    return context.prisma.plaine.create({ data: {} });
   },
   createMare: (root, args, context) => {
-    return context.prisma.createMare({
-      nom: args.nom,
-      plaine: {
-        connect: { id: args.plaineId }
-      }
-    })
+    return context.prisma.mare.create({
+      data: {
+        nom: args.nom,
+        plaine: {
+          connect: { id: args.plaineId },
+        },
+      },
+    });
   },
   addCanard: (root, args, context) => {
-    return context.prisma.createCanard({
-      nom: args.nom,
-      mare: {
-        connect: { id: args.mareId }
-      }
-    })
+    return context.prisma.canard.create({
+      data: {
+        nom: args.nom,
+        mare: {
+          connect: { id: args.mareId },
+        },
+      },
+    });
   },
   addPoissons: (root, args, context) => {
-    const poissonsCreated = []
-    for (let i=1; i<= args.quantite; i++ ) {
-      poissonsCreated.push(context.prisma.createPoisson({
-        mare: {
-          connect: { id: args.mareId }
-        }
-      }))
+    const poissonsCreated = [];
+    for (let i = 1; i <= args.quantite; i++) {
+      poissonsCreated.push(
+        context.prisma.poisson.create({
+          data: {
+            mare: {
+              connect: { id: args.mareId },
+            },
+          },
+        })
+      );
     }
     return poissonsCreated;
   },
   moveCanard: (root, args, context) => {
-    return context.prisma.updateCanard({
+    return context.prisma.canard.update({
       data: {
         mare: {
-          connect: { id: args.destinationMareId }
-        }
+          connect: { id: args.destinationMareId },
+        },
       },
       where: {
-        id: args.canardId
-      }
-    })
-  }
-}
+        id: args.canardId,
+      },
+    });
+  },
+};

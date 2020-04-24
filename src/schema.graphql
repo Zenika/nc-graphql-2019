@@ -2,12 +2,11 @@ type Query {
   plaine(id: ID!): Plaine
   plaines: [Plaine!]
   mare(id: ID!): Mare
-  mares(plaineId: ID!): [Mare!]
-  canard(mareId: ID!, id: ID!): Canard
-  canards(mareId: ID!): [Canard]
-  allCanards: [Canard]
-  allPoissons: [Poisson]
-  poissons(mareId: ID!): [Poisson]
+  mares: [Mare!]
+  canard(id: ID!): Canard
+  canards: [Canard!]
+  poisson(id: ID!): Poisson
+  poissons: [Poisson!]
 }
 
 type Mutation {

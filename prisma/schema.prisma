@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Plaine {
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  mares       Mare[]
+}
+
+model Mare {
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  nom         String
+  plaine      Plaine    @relation(fields: [plaineId], references: [id])
+  plaineId    String
+  canards     Canard[]
+  poissons    Poisson[]
+}
+
+model Canard {
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  mare        Mare      @relation(fields: [mareId], references: [id])
+  mareId      String
+  nom         String
+  isAffame    Boolean   @default(value: false)
+}
+
+model Poisson {
+  id            String    @id @default(uuid())
+  createdAt     DateTime  @default(now())
+  mare          Mare      @relation(fields: [mareId], references: [id])
+  mareId        String
+  isGros        Boolean   @default(value: false)
+  isCanarovore  Boolean   @default(value: false)
+}
