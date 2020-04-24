@@ -18,10 +18,6 @@ type Mutation {
   moveCanard(destinationMareId: ID!, canardId: ID!): Canard
 }
 
-type Subscription {
-  nouveauCanard(mareID: ID): Canard
-}
-
 type Plaine {
   id: ID!
   mares: [Mare!]
