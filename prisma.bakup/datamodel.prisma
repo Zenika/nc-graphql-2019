@@ -1,0 +1,30 @@
+type Plaine {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  mares: [Mare!]
+}
+
+type Mare {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  nom: String
+  plaine: Plaine!
+  canards: [Canard!]
+  poissons: [Poisson!]
+}
+
+type Canard {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  mare: Mare!
+  nom: String
+  isAffame: Boolean @default(value: false)
+}
+
+type Poisson {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  mare: Mare!
+  isGros: Boolean @default(value: false)
+  isCanarovore: Boolean @default(value: false)
+}
