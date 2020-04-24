@@ -10,12 +10,7 @@ type Query {
 }
 
 type Mutation {
-  createPlaine: Plaine
-  createMare(plaineId: ID!, nom: String): Mare
-  addCanard(mareId: ID!, nom: String): Canard
-  addPoissons(mareId: ID!, quantite: Int!): [Poisson]
-  eatPoisson(mareId: ID!): Canard
-  moveCanard(destinationMareId: ID!, canardId: ID!): Canard
+  createMare(plaineId: ID!, name: String): Mare
 }
 
 type Plaine {
